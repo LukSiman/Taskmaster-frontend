@@ -6,14 +6,27 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DayTasksComponent } from './day-tasks/day-tasks.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: 'current', component: DayTasksComponent },
+  // { path: 'calendar', component: ProjectPageComponent },
+  // { path: 'insights', component: ProjectPageComponent },
+  // { path: 'settings', component: ProjectPageComponent },
+  { path: '', component: DayTasksComponent },
+  { path: '**', component: DayTasksComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    DayTasksComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
     NgbModule
