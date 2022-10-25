@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export interface getTask {
+export interface Task {
   taskUUID: string;
   taskName: string;
   taskOrder: number;
@@ -15,10 +15,6 @@ export interface getTask {
   categoryName: string;
 }
 
-export interface getTasks {
-  tasks: Task[];
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,9 +24,8 @@ export class TaskService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTasks(getUrl: string): Observable<Task[]> {
-    return this.httpClient.get<getTasks>(getUrl).pipe(
-      map((response: { tasks: Task[]; }) => response.tasks)
-    );
+  //gets all task objects from the backend
+  getTasks(): Observable<Task[]> { 
+    return this.httpClient.get<Task[]>(this.baseUrl);
   }
 }
