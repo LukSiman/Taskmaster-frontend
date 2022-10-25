@@ -16,7 +16,7 @@ export class DayTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(() => {
-      this.displayTasks();
+      this.displayCurrentDayTasks();
     });
   }
 
@@ -24,7 +24,19 @@ export class DayTasksComponent implements OnInit {
   displayTasks(): void {
     this.taskService.getTasks().subscribe(response => {
       this.tasks = response;
-      console.log(this.tasks);
-    });    
+      console.log(this.tasks);//TODO: DELETE
+    });
+  }
+
+  //displays tasks for the current day
+  displayCurrentDayTasks(): void {
+    //get today's date
+    let date: Date = new Date;
+    let today: string = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+    this.taskService.getTasksByDate(today).subscribe(response => {
+      this.tasks = response;
+      console.log(this.tasks);//TODO: DELETE
+    });
   }
 }

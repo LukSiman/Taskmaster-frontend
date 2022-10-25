@@ -19,6 +19,7 @@ export interface Task {
   providedIn: 'root'
 })
 export class TaskService {
+ 
   //backend url for task object JSONs
   private baseUrl = `${environment.backendUrl}/tasks`;
 
@@ -27,5 +28,11 @@ export class TaskService {
   //gets all task objects from the backend
   getTasks(): Observable<Task[]> { 
     return this.httpClient.get<Task[]>(this.baseUrl);
+  }
+
+  //gets all task objects for provided date
+  getTasksByDate(date: string): Observable<Task[]> {
+    let getUrl = `${this.baseUrl}/date/${date}`;
+    return this.httpClient.get<Task[]>(getUrl);
   }
 }
