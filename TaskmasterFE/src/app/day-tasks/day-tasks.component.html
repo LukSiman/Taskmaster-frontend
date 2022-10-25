@@ -1,1 +1,8 @@
-<p>day-tasks works!</p>
+<ul *ngFor="let task of tasks">
+    <li>{{ task.taskName }}</li>
+    <li>{{ task.taskNote }}</li>
+    <li>{{ task.taskDate }}</li>
+    <li>{{ task.taskStartTime }}</li>
+    <li>{{ task.taskEndTime }}</li>
+    <li>{{ task.categoryName }}</li>
+</ul>
