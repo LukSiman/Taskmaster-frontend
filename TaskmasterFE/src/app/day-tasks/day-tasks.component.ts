@@ -12,6 +12,9 @@ export class DayTasksComponent implements OnInit {
   //array to hold tasks
   tasks: Task[] = [];
 
+  //today's date
+  today: string = "";
+
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -32,9 +35,9 @@ export class DayTasksComponent implements OnInit {
   displayCurrentDayTasks(): void {
     //get today's date
     let date: Date = new Date;
-    let today: string = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    this.today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
-    this.taskService.getTasksByDate(today).subscribe(response => {
+    this.taskService.getTasksByDate(this.today).subscribe(response => {
       this.tasks = response;
       console.log(this.tasks);//TODO: DELETE
     });
