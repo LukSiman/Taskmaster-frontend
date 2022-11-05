@@ -6,17 +6,20 @@
         <div class="row">
             <div class="col border">
                 <h3>Tasks</h3>
-                <!-- <div class="border" *ngFor="let task of tasks">
-                    <p>{{ task.taskName }}</p>
-                </div> -->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" *ngFor="let task of tasks">
-                        <ng-template #note>
-                            <p>{{ task.taskNote }}</p>
+                        <div *ngIf="task.taskNote != null; else elseBlock">
+                            <ng-template #note>
+                                <p>{{ task.taskNote }}</p>
+                            </ng-template>
+                            <p *ngIf="task.taskNote != null" placement="bottom" [ngbPopover]="note"
+                                popoverTitle="Note:">
+                                {{ task.taskName }}
+                            </p>
+                        </div>
+                        <ng-template #elseBlock>
+                            <p> {{ task.taskName }}</p>
                         </ng-template>
-                        <p placement="bottom" [ngbPopover]="note" popoverTitle="Note:">
-                            {{ task.taskName }}
-                        </p>
                     </li>
                 </ul>
             </div>
