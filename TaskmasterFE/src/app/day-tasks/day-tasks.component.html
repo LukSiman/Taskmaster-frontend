@@ -1,16 +1,26 @@
 <div class="container-fluid row">
     <div class="container col border p-2">
         <div>
-            <h2>{{today | date:'fullDate'}}</h2>
+            <h2>{{today | date:'MMMM d, y (EEEE)'}}</h2>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col border">
                 <h3>Tasks</h3>
-                <div *ngFor="let task of tasks">
+                <!-- <div class="border" *ngFor="let task of tasks">
                     <p>{{ task.taskName }}</p>
-                </div>
+                </div> -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngFor="let task of tasks">
+                        <ng-template #note>
+                            <p>{{ task.taskNote }}</p>
+                        </ng-template>
+                        <p placement="bottom" [ngbPopover]="note" popoverTitle="Note:">
+                            {{ task.taskName }}
+                        </p>
+                    </li>
+                </ul>
             </div>
-            <div class="col">
+            <div class="col border">
                 <h3>Current task</h3>
             </div>
         </div>
