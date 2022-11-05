@@ -3,30 +3,38 @@
         <div>
             <h2>{{today | date:'MMMM d, y (EEEE)'}}</h2>
         </div>
-        <div class="row">
-            <div class="col border">
-                <h3>Tasks</h3>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" *ngFor="let task of tasks">
-                        <div *ngIf="task.taskNote != null; else elseBlock">
-                            <ng-template #note>
-                                <p>{{ task.taskNote }}</p>
+        <nav ngbNav #nav="ngbNav" class="nav-tabs">
+            <ng-container ngbNavItem>
+                <a ngbNavLink>
+                    <h4>Tasks</h4>
+                </a>
+                <ng-template ngbNavContent>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let task of tasks">
+                            <div *ngIf="task.taskNote != null; else elseBlock">
+                                <ng-template #note>
+                                    <p>{{ task.taskNote }}</p>
+                                </ng-template>
+                                <p role="button" placement="bottom" [ngbPopover]="note"
+                                    popoverTitle="Note:">
+                                    {{ task.taskName }}
+                                </p>
+                            </div>
+                            <ng-template #elseBlock>
+                                <p> {{ task.taskName }}</p>
                             </ng-template>
-                            <p *ngIf="task.taskNote != null" placement="bottom" [ngbPopover]="note"
-                                popoverTitle="Note:">
-                                {{ task.taskName }}
-                            </p>
-                        </div>
-                        <ng-template #elseBlock>
-                            <p> {{ task.taskName }}</p>
-                        </ng-template>
-                    </li>
-                </ul>
-            </div>
-            <div class="col border">
-                <h3>Current task</h3>
-            </div>
-        </div>
+                        </li>
+                    </ul>
+                </ng-template>
+            </ng-container>
+            <ng-container ngbNavItem>
+                <a ngbNavLink>
+                    <h4>Current task</h4>
+                </a>
+                <ng-template ngbNavContent></ng-template>
+            </ng-container>
+        </nav>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </div>
 
     <div class="container col border p-2">

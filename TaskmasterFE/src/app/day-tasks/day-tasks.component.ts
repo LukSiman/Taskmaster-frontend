@@ -35,8 +35,11 @@ export class DayTasksComponent implements OnInit {
   displayCurrentDayTasks(): void {
     //get today's date
     let date: Date = new Date;
-    this.today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    let month: string = (date.getMonth() + 1).toString().padStart(2, "0");
+    let day: string = date.getDate().toString().padStart(2, "0");
+    this.today = `${date.getFullYear()}-${month}-${day}`;
 
+    //send date to service for today's tasks
     this.taskService.getTasksByDate(this.today).subscribe(response => {
       this.tasks = response;
       console.log(this.tasks);//TODO: DELETE
