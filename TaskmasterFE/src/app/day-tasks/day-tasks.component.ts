@@ -12,7 +12,8 @@ export class DayTasksComponent implements OnInit {
   //array to hold tasks
   tasks: Task[] = [];
 
-  //today's date
+  //date variables
+  date: Date = new Date;
   today: string = "";
 
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
@@ -33,11 +34,14 @@ export class DayTasksComponent implements OnInit {
 
   //displays tasks for the current day
   displayCurrentDayTasks(): void {
-    //get today's date
-    let date: Date = new Date;
-    let month: string = (date.getMonth() + 1).toString().padStart(2, "0");
-    let day: string = date.getDate().toString().padStart(2, "0");
-    this.today = `${date.getFullYear()}-${month}-${day}`;
+    //update date each second
+    setInterval(() => {
+      this.date = new Date;
+    }, 1000);
+
+    let month: string = (this.date.getMonth() + 1).toString().padStart(2, "0");
+    let day: string = this.date.getDate().toString().padStart(2, "0");
+    this.today = `${this.date.getFullYear()}-${month}-${day}`;
 
     //send date to service for today's tasks
     this.taskService.getTasksByDate(this.today).subscribe(response => {

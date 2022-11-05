@@ -18,6 +18,8 @@
                                 <p role="button" placement="bottom" [ngbPopover]="note"
                                     popoverTitle="Note:">
                                     {{ task.taskName }}
+                                    {{ task.taskStartTime }}
+                                    {{ task.taskEndTime }}
                                 </p>
                             </div>
                             <ng-template #elseBlock>
@@ -29,9 +31,11 @@
             </ng-container>
             <ng-container ngbNavItem>
                 <a ngbNavLink>
-                    <h4>Current task</h4>
+                    <h4>Task in progress</h4>
                 </a>
-                <ng-template ngbNavContent></ng-template>
+                <ng-template ngbNavContent>
+
+                </ng-template>
             </ng-container>
         </nav>
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -39,5 +43,6 @@
 
     <div class="container col border p-2">
         <h2>Other info goes here</h2>
+        <p>Current time: {{date | date:'HH:mm:ss'}}</p>
     </div>
 </div>
