@@ -18,7 +18,7 @@ export class DayTasksComponent implements OnInit {
   today: string = "";
 
   //current task
-  currentTask: Task = new Task;
+  currentTask: Task | any = null;
 
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
 
@@ -74,13 +74,24 @@ export class DayTasksComponent implements OnInit {
   }
 
   //find current task
-  findCurrentTask() {
-    console.log("Test");
-
+  findCurrentTask(): void {
     this.tasks.forEach(task => {
-      console.log(`Start time: ${task.taskStartTime}`);
-      console.log(`End time: ${task.taskStartTime}`);
-      console.log(`Current time: ${this.date.getTime()}`);
+      //there are no set times skip the task
+      if (task.taskStartTime == null || task.taskEndTime == null) {
+        return;
+      }
+
+      let startTimeArray: number[] = task.taskStartTime.toString().split(",").map(Number);
+      let endTimeArray: number[] = task.taskEndTime.toString().split(",").map(Number);
+
+      //set current task if it aligns with current time
+      if (this.date.getHours() >= startTimeArray[0] && this.date.getHours() <= endTimeArray[0]) {
+        if (this.date.getMinutes() >= startTimeArray[1] && this.date.getMinutes() <= endTimeArray[1]) {
+          this.currentTask = task;
+          return task;
+        }
+      }
+      return;
     });
   }
 }
