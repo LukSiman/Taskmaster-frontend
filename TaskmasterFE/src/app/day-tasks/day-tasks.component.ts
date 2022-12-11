@@ -23,10 +23,6 @@ export class DayTasksComponent implements OnInit {
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.activatedRoute.paramMap.subscribe(() => {
-    //   this.displayCurrentDayTasks();
-    // });
-
     this.start();
   }
 
@@ -81,15 +77,22 @@ export class DayTasksComponent implements OnInit {
         return;
       }
 
-      let startTimeArray: number[] = task.taskStartTime.toString().split(",").map(Number);
-      let endTimeArray: number[] = task.taskEndTime.toString().split(",").map(Number);
+      //get start time of the task
+      let startTime = new Date();
+      startTime.setHours(task.taskStartTime.toString().split(",").map(Number)[0]);
+      startTime.setMinutes(task.taskStartTime.toString().split(",").map(Number)[1]);
+      startTime.setSeconds(0);
+
+      //get ebd tune if the task
+      let endTime = new Date();
+      endTime.setHours(task.taskEndTime.toString().split(",").map(Number)[0]);
+      endTime.setMinutes(task.taskEndTime.toString().split(",").map(Number)[1]);
+      endTime.setSeconds(0);
 
       //set current task if it aligns with current time
-      if (this.date.getHours() >= startTimeArray[0] && this.date.getHours() <= endTimeArray[0]) {
-        if (this.date.getMinutes() >= startTimeArray[1] && this.date.getMinutes() <= endTimeArray[1]) {
-          this.currentTask = task;
-          return task;
-        }
+      if (startTime < this.date && endTime > this.date) {
+        this.currentTask = task;
+        return task;
       }
       return;
     });
