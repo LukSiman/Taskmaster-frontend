@@ -52,6 +52,7 @@ export class DayTasksComponent implements OnInit {
     setInterval(() => {
       this.date = new Date;
 
+      //update remaining and elapsed time if current task exists
       if (this.currentTask != null) {
         let startTime: Date = this.getCorrectedDate(this.currentTask.taskStartTime);
         let endTime: Date = this.getCorrectedDate(this.currentTask.taskEndTime);
