@@ -17,8 +17,14 @@ export class DayTasksComponent implements OnInit {
   date: Date = new Date;
   today: string = "";
 
-  //current task
+  //time variables
+  totalTaskTime: string = "";
+  elapsedTime: Date = new Date;
+  remainingTime: Date = new Date;
+
+  //task variables
   currentTask: Task | any = null;
+  nextTask: Task | any = null;
 
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
 
@@ -71,7 +77,10 @@ export class DayTasksComponent implements OnInit {
 
   //find current task
   findCurrentTask(): void {
+    let index = 0;
     this.tasks.forEach(task => {
+      index++;
+
       //there are no set times skip the task
       if (task.taskStartTime == null || task.taskEndTime == null) {
         return;
@@ -83,7 +92,7 @@ export class DayTasksComponent implements OnInit {
       startTime.setMinutes(task.taskStartTime.toString().split(",").map(Number)[1]);
       startTime.setSeconds(0);
 
-      //get ebd tune if the task
+      //get end time if the task
       let endTime = new Date();
       endTime.setHours(task.taskEndTime.toString().split(",").map(Number)[0]);
       endTime.setMinutes(task.taskEndTime.toString().split(",").map(Number)[1]);
@@ -92,9 +101,17 @@ export class DayTasksComponent implements OnInit {
       //set current task if it aligns with current time
       if (startTime < this.date && endTime > this.date) {
         this.currentTask = task;
+        let differenceInSeconds: number = (endTime.getTime() - startTime.getTime()) / 1000;
+        let seconds: number = differenceInSeconds % 60;
+        let minutes: number = (differenceInSeconds / 60) % 60;
+        let hours: number = Math.trunc((differenceInSeconds / 60 / 60) % 24);
+        this.totalTaskTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
         return task;
       }
       return;
     });
   }
+
+
 }
