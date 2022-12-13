@@ -119,8 +119,8 @@ export class DayTasksComponent implements OnInit {
   // returns a string in the correct time format
   getTimeFormat(startTime: Date, endTime: Date): string {
     let differenceInSeconds: number = (endTime.getTime() - startTime.getTime()) / 1000;
-    let seconds: number = differenceInSeconds % 60;
-    let minutes: number = (differenceInSeconds / 60) % 60;
+    let seconds: number = Math.trunc(differenceInSeconds % 60);
+    let minutes: number = Math.trunc((differenceInSeconds / 60) % 60);
     let hours: number = Math.trunc((differenceInSeconds / 60 / 60) % 24);
     let formattedString = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
