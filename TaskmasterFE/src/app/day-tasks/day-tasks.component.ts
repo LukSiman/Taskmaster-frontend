@@ -24,6 +24,8 @@ export class DayTasksComponent implements OnInit {
 
   //task variables
   currentTask: Task | any = null;
+  currentTaskStartTime: string = "";
+  currentTaskEndTime: string = "";
   nextTask: Task | any = null;
 
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
@@ -99,6 +101,8 @@ export class DayTasksComponent implements OnInit {
       //set current task if it aligns with current time
       if (startTime < this.date && endTime > this.date) {
         this.currentTask = task;
+        this.currentTaskStartTime = startTime.toString();
+        this.currentTaskEndTime = endTime.toString();
         this.totalTaskTime = this.getTimeFormat(startTime, endTime);
 
         return task;
