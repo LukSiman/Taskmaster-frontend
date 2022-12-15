@@ -12,7 +12,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   { path: 'current', component: DayTasksComponent },
-  // { path: 'calendar', component: ProjectPageComponent },
+  { path: 'calendar', component: CalendarComponent },
   // { path: 'insights', component: ProjectPageComponent },
   // { path: 'settings', component: ProjectPageComponent },
   { path: '', component: DayTasksComponent },
