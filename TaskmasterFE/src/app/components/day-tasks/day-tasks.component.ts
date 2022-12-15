@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
-import { Task } from '../entities/task';
-import { TaskService } from '../services/task.service';
+import { Task } from '../../entities/task';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-day-tasks',

@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { DayTasksComponent } from './day-tasks/day-tasks.component';
+import { DayTasksComponent } from './components/day-tasks/day-tasks.component';
 import { RouterModule, Routes } from '@angular/router';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   { path: 'current', component: DayTasksComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    DayTasksComponent
+    DayTasksComponent,
+    CalendarComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
