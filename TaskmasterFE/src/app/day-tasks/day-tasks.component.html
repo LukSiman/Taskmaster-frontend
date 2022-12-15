@@ -16,12 +16,11 @@
                                     <p>{{ task.taskNote }}</p>
                                 </ng-template>
                                 <div role="button" placement="bottom" [ngbPopover]="note" popoverTitle="Note:">
-                                    <div *ngIf="task.taskName == currentTask.taskName; else elseBlock" class="fw-bold text-decoration-underline">
+                                    <div *ngIf="task.taskName == currentTask.taskName; else elseBlock"
+                                        class="fw-bold text-decoration-underline">
                                         {{ task.taskName }}
                                     </div>
 
-                                    <!-- {{ task.taskStartTime }}
-                                    {{ task.taskEndTime }} -->
                                     <ng-template #elseBlock>
                                         {{ task.taskName }}
                                     </ng-template>
@@ -50,8 +49,8 @@
     </div>
 
     <div class="container col border p-2">
-        <h2>Other info goes here</h2>
-        <p>Current time: {{date | date:'HH:mm:ss'}}</p>
+        <h2>Additional information:</h2>
+        <h4 class="pt-2 pb-3">Current time: {{date | date:'HH:mm:ss'}}</h4>
         <div *ngIf="currentTask != null">
             <p>Total task length: {{totalTaskTime}}</p>
             <p>Elapsed time: {{elapsedTime}}</p>
