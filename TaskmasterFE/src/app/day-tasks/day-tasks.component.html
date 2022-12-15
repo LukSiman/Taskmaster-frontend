@@ -16,7 +16,7 @@
                                     <p>{{ task.taskNote }}</p>
                                 </ng-template>
                                 <div role="button" placement="bottom" [ngbPopover]="note" popoverTitle="Note:">
-                                    <div *ngIf="task.taskName == currentTask.taskName; else elseBlock" class="bg-success bg-gradient bg-opacity-50">
+                                    <div *ngIf="task.taskName == currentTask.taskName; else elseBlock" class="fw-bold text-decoration-underline">
                                         {{ task.taskName }}
                                     </div>
 
