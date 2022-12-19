@@ -28,7 +28,7 @@ export class DayTasksComponent implements OnInit {
   currentTaskEndTime: string = "";
   nextTask: Task | any = null;
 
-  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
     this.start();
@@ -56,11 +56,11 @@ export class DayTasksComponent implements OnInit {
 
       //update remaining and elapsed time if current task exists
       if (this.currentTask != null) {
-        let startTime: Date = this.getCorrectedDate(this.currentTask.taskStartTime);
-        let endTime: Date = this.getCorrectedDate(this.currentTask.taskEndTime);
+        // let startTime: Date = this.getCorrectedDate(this.currentTask.taskStartTime);
+        // let endTime: Date = this.getCorrectedDate(this.currentTask.taskEndTime);
 
-        this.elapsedTime = this.getTimeFormat(startTime, this.date);
-        this.remainingTime = this.getTimeFormat(this.date, endTime);
+        // this.elapsedTime = this.getTimeFormat(startTime, this.date);
+        // this.remainingTime = this.getTimeFormat(this.date, endTime);
       }
 
     }, 1000);
@@ -93,7 +93,11 @@ export class DayTasksComponent implements OnInit {
       }
 
       //get start time of the task
-      let startTime: Date = this.getCorrectedDate(task.taskStartTime);
+      // let startTime: Date = this.getCorrectedDate(task.taskStartTime);
+      let startTime: Date = new Date();
+      // startTime
+      console.log(task.taskStartTime);
+      console.log(startTime);
 
       //get end time if the task
       let endTime: Date = this.getCorrectedDate(task.taskEndTime);

@@ -16,18 +16,22 @@
                                     <p>{{ task.taskNote }}</p>
                                 </ng-template>
                                 <div role="button" placement="bottom" [ngbPopover]="note" popoverTitle="Note:">
-                                    <div *ngIf="task.taskName == currentTask.taskName; else elseBlock"
-                                        class="fw-bold text-decoration-underline">
-                                        {{ task.taskName }}
+                                    <div *ngIf="currentTask != null; else elseBlock">
+                                        <div *ngIf="task.taskName == currentTask.taskName; else elseBlock"
+                                            class="fw-bold text-decoration-underline">
+                                            {{ task.taskName }}
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            {{ task.taskName }}
+                                        </ng-template>
                                     </div>
-
                                     <ng-template #elseBlock>
                                         {{ task.taskName }}
                                     </ng-template>
                                 </div>
                             </div>
                             <ng-template #elseBlock>
-                                <p> {{ task.taskName }}</p>
+                                {{ task.taskName }}
                             </ng-template>
                         </li>
                     </ul>
