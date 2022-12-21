@@ -56,11 +56,11 @@ export class DayTasksComponent implements OnInit {
 
       //update remaining and elapsed time if current task exists
       if (this.currentTask != null) {
-        // let startTime: Date = this.getCorrectedDate(this.currentTask.taskStartTime);
-        // let endTime: Date = this.getCorrectedDate(this.currentTask.taskEndTime);
+        let startTime: Date = new Date(this.currentTask.taskStartTime);
+        let endTime: Date = new Date(this.currentTask.taskEndTime);
 
-        // this.elapsedTime = this.getTimeFormat(startTime, this.date);
-        // this.remainingTime = this.getTimeFormat(this.date, endTime);
+        this.elapsedTime = this.getTimeFormat(startTime, this.date);
+        this.remainingTime = this.getTimeFormat(this.date, endTime);
       }
 
     }, 1000);
@@ -93,14 +93,10 @@ export class DayTasksComponent implements OnInit {
       }
 
       //get start time of the task
-      // let startTime: Date = this.getCorrectedDate(task.taskStartTime);
-      let startTime: Date = new Date();
-      // startTime
-      console.log(task.taskStartTime);
-      console.log(startTime);
+      let startTime: Date = new Date(task.taskStartTime);
 
       //get end time if the task
-      let endTime: Date = this.getCorrectedDate(task.taskEndTime);
+      let endTime: Date = new Date(task.taskEndTime);
 
       //set current task if it aligns with current time
       if (startTime < this.date && endTime > this.date) {
@@ -115,16 +111,6 @@ export class DayTasksComponent implements OnInit {
     });
   }
 
-  // returns task time in correct format
-  getCorrectedDate(time: Date): Date {
-    let returnTime = new Date();
-    returnTime.setHours(time.toString().split(",").map(Number)[0]);
-    returnTime.setMinutes(time.toString().split(",").map(Number)[1]);
-    returnTime.setSeconds(0);
-
-    return returnTime;
-  }
-
   // returns a string in the correct time format
   getTimeFormat(startTime: Date, endTime: Date): string {
     let differenceInSeconds: number = (endTime.getTime() - startTime.getTime()) / 1000;
@@ -135,5 +121,4 @@ export class DayTasksComponent implements OnInit {
 
     return formattedString;
   }
-
 }

@@ -13,7 +13,7 @@
                         <li class="list-group-item" *ngFor="let task of tasks">
                             <div *ngIf="task.taskNote != null; else elseBlock">
                                 <ng-template #note>
-                                    <p>{{ task.taskNote }}</p>
+                                    {{ task.taskNote }}
                                 </ng-template>
                                 <div role="button" placement="bottom" [ngbPopover]="note" popoverTitle="Note:">
                                     <div *ngIf="currentTask != null; else elseBlock">
