@@ -11,7 +11,11 @@ import { lastValueFrom } from 'rxjs';
 export class CalendarComponent implements OnInit {
   tasks: Task[] = [];
   days: any[] = [];
+  daysMap: Map<string, Task[]> = new Map();
+  // daysMap: Map<Date, string> = new Map();
 
+  firstMonthDay: Date = new Date();
+  lastMonthDay: Date = new Date();
 
   constructor(private taskService: TaskService) { }
 
@@ -20,9 +24,9 @@ export class CalendarComponent implements OnInit {
   }
 
   async start(): Promise<void> {
-    await this.getAllTasks();
     this.createThisMonthCalendar();
-    // this.groupTasksToDays();
+    await this.getAllTasks();
+    this.populateDayMap();
   }
 
   //gets all tasks from server
@@ -38,7 +42,7 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  //creates an array for days of the current month
+  //populates the Map for days of the current month
   //TODO: month and year according to selected year and month
   createThisMonthCalendar(): void {
     let currentDate: Date = new Date();
@@ -46,28 +50,36 @@ export class CalendarComponent implements OnInit {
     let currentMonth: number = currentDate.getMonth() + 1;
     let date: number = Date.parse(`${currentMonth}/01/${currentYear}`);
     let day: Date = new Date(date);
+    this.firstMonthDay = new Date(date);
     let lastDay: number = new Date(currentYear, currentMonth, 0).getDate();
+    this.lastMonthDay = new Date(currentYear, currentMonth, 0);
 
     for (let index = 0; index < lastDay; index++) {
-      this.days.push(day);
+      this.daysMap.set(day.toDateString(), []);
       day = new Date(day);
       day.setDate(day.getDate() + 1)
     }
-
-    console.log(this.days);
+    // console.log(this.daysMap);
   }
 
-  //groups tasks into separate days
-  groupTasksToDays(): void {
+  //populate days map with days
+  populateDayMap(): void {
     this.tasks.forEach(task => {
-      if (!this.days.includes(task.taskDate)) {
-        let day = new Map();
+      //getting date in correct format
+      let date: string[] = task.taskDate.toString().split("-");
+      let year: number = Number(date[0]);
+      let month: number = Number(date[1]);
+      let day: number = Number(date[2]);
+      let taskDate: Date = new Date(`${month}/${day}/${year}`);
 
-
-        // this.days.push(task.taskDate);
+      //adding the task to the correct day 
+      if (taskDate >= this.firstMonthDay && taskDate <= this.lastMonthDay) {
+        let dateString = taskDate.toDateString();
+        let taskArray: Task[] = this.daysMap.get(dateString)!;
+        taskArray.push(task);
       }
     });
 
-    console.log(this.days);
+    console.log(this.daysMap);//TODO: DELETE
   }
 }
