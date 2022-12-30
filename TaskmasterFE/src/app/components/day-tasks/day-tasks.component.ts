@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { Task } from '../../entities/task';
 import { TaskService } from '../../services/task.service';
 
@@ -35,7 +34,7 @@ export class DayTasksComponent implements OnInit {
   }
 
   //starts the methods to get tasks
-  async start() {
+  async start(): Promise<void> {
     await this.displayCurrentDayTasks()
     this.findCurrentTask();
   }
