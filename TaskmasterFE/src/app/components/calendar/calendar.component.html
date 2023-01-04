@@ -1,17 +1,33 @@
 <div class="container">
-    <div class="row">
-    <div *ngFor="let day of daysMap | keyvalue: mapOrder" class="col">
-        <div *ngIf="day.value.length <= 0; else elseBlock">
-            <div class="border p-2">
-                {{day.key | date:'d'}}
-            </div>
-
-        </div>
-        <ng-template #elseBlock>
-            <div class="border p-2">
-                {{day.key | date:'d'}}: {{day.value.length}}
-            </div>
-        </ng-template>
+    <div class="border text-center fw-bold">
+        {{ firstMonthDay | date:'y' }}
     </div>
-</div>
+    <div class="border text-center fw-bold">
+        {{ firstMonthDay | date:'MMMM' }}
+    </div>
+    <div class="row" id="calendar">
+        <div *ngFor="let weekDay of daysOfTheWeek" class="border p-1 text-center fw-bold">
+            {{ weekDay }}
+        </div>
+    </div>
+    <div class="row" id="calendar">
+        <div *ngFor="let day of daysMap | keyvalue: mapOrder" class="col p-0">
+            <div *ngIf="day.value.length <= 0; else elseBlock">
+                <div class="border p-1 dayItem">
+                    {{day.key | date:'d'}}
+                </div>
+
+            </div>
+            <ng-template #elseBlock>
+                <div class="border p-1 dayItem position-relative">
+                    <div>
+                        {{day.key | date:'d'}}
+                    </div>
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                        {{day.value.length}}
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
 </div>
