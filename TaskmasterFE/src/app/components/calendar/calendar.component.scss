@@ -1,0 +1,15 @@
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .dayItem {
+        height: 60px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        :nth-child(2) {
+            font-weight: bolder;
+        }
+    }
+}
