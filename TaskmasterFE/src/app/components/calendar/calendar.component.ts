@@ -10,9 +10,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class CalendarComponent implements OnInit {
   tasks: Task[] = [];
-  days: any[] = [];
   daysMap: Map<string, Task[]> = new Map();
-  // daysMap: Map<Date, string> = new Map();
 
   firstMonthDay: Date = new Date();
   lastMonthDay: Date = new Date();
@@ -26,7 +24,7 @@ export class CalendarComponent implements OnInit {
   async start(): Promise<void> {
     this.createThisMonthCalendar();
     await this.getAllTasks();
-    this.populateDayMap();
+    this.populateDayMap();;
   }
 
   //gets all tasks from server
@@ -59,10 +57,9 @@ export class CalendarComponent implements OnInit {
       day = new Date(day);
       day.setDate(day.getDate() + 1)
     }
-    // console.log(this.daysMap);
   }
 
-  //populate days map with days
+  //populate days map with tasks for the appropriate day
   populateDayMap(): void {
     this.tasks.forEach(task => {
       //getting date in correct format
@@ -82,4 +79,9 @@ export class CalendarComponent implements OnInit {
 
     console.log(this.daysMap);//TODO: DELETE
   }
+
+  //orders the map in ascending values
+  mapOrder(a: any, b: any) {
+    return 1;
+ }
 }
