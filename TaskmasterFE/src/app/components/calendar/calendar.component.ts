@@ -11,6 +11,7 @@ import { lastValueFrom } from 'rxjs';
 export class CalendarComponent implements OnInit {
   tasks: Task[] = [];
   daysMap: Map<string, Task[]> = new Map();
+  daysOfTheWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   firstMonthDay: Date = new Date();
   lastMonthDay: Date = new Date();
