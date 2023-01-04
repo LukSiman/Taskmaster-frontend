@@ -1,5 +1,17 @@
-<div *ngFor="let day of days">
-    <div>
-        {{ day.taskName }}
-    </div>    
+<div class="container">
+    <div class="row">
+    <div *ngFor="let day of daysMap | keyvalue: mapOrder" class="col">
+        <div *ngIf="day.value.length <= 0; else elseBlock">
+            <div class="border p-2">
+                {{day.key | date:'d'}}
+            </div>
+
+        </div>
+        <ng-template #elseBlock>
+            <div class="border p-2">
+                {{day.key | date:'d'}}: {{day.value.length}}
+            </div>
+        </ng-template>
+    </div>
+</div>
 </div>
