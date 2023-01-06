@@ -25,7 +25,7 @@ export class CalendarComponent implements OnInit {
   async start(): Promise<void> {
     this.createThisMonthCalendar();
     await this.getAllTasks();
-    this.populateDayMap();;
+    this.populateDayMap();
   }
 
   //gets all tasks from server
@@ -52,6 +52,18 @@ export class CalendarComponent implements OnInit {
     this.firstMonthDay = new Date(date);
     let lastDay: number = new Date(currentYear, currentMonth, 0).getDate();
     this.lastMonthDay = new Date(currentYear, currentMonth, 0);
+
+    console.log(this.daysMap);
+    console.log(this.firstMonthDay.getDay());
+    let firstDay = this.firstMonthDay.getDay() - 1;
+    if (firstDay == -1) {
+      firstDay = 6;
+    }
+    console.log(firstDay);
+
+    for (let index = 0; index < firstDay; index++) {
+      this.daysMap.set(`${index}`, []);
+    }
 
     for (let index = 0; index < lastDay; index++) {
       this.daysMap.set(day.toDateString(), []);
@@ -84,5 +96,5 @@ export class CalendarComponent implements OnInit {
   //orders the map in ascending values
   mapOrder(a: any, b: any) {
     return 1;
- }
+  }
 }

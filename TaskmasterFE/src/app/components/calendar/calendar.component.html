@@ -13,9 +13,15 @@
     <div class="row" id="calendar">
         <div *ngFor="let day of daysMap | keyvalue: mapOrder" class="col p-0">
             <div *ngIf="day.value.length <= 0; else elseBlock">
-                <div class="border p-1 dayItem">
-                    {{day.key | date:'d'}}
+                <div *ngIf="day.key.length == 1; else elseBlock">
+                    <div class="border p-1 dayItem">
+                    </div>
                 </div>
+                <ng-template #elseBlock>
+                    <div class="border p-1 dayItem">
+                        {{day.key | date:'d'}}
+                    </div>
+                </ng-template>
 
             </div>
             <ng-template #elseBlock>
