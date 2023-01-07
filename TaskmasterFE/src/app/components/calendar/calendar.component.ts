@@ -53,13 +53,10 @@ export class CalendarComponent implements OnInit {
     let lastDay: number = new Date(currentYear, currentMonth, 0).getDate();
     this.lastMonthDay = new Date(currentYear, currentMonth, 0);
 
-    console.log(this.daysMap);
-    console.log(this.firstMonthDay.getDay());
     let firstDay = this.firstMonthDay.getDay() - 1;
     if (firstDay == -1) {
       firstDay = 6;
     }
-    console.log(firstDay);
 
     for (let index = 0; index < firstDay; index++) {
       this.daysMap.set(`${index}`, []);

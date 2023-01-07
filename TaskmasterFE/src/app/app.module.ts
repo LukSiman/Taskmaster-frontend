@@ -22,7 +22,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     FooterComponent,
     DayTasksComponent,
     CalendarComponent
@@ -32,7 +31,8 @@ const routes: Routes = [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    NavbarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
