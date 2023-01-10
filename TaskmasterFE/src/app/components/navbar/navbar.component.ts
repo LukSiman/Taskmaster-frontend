@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -15,20 +15,22 @@ export class NavbarComponent implements OnInit {
   //tracks if menu is collapsed
   isMenuCollapsed = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // console.log(this.router.snapshot.url);
+    console.log(this.router.parseUrl(this.router.url).root.segments);
   }
 
   //adds active class to the nav item
-  makeActive(element: HTMLElement){
+  makeActive(element: HTMLElement) {
     let currentActivePage = document.querySelector(".active");
-    currentActivePage?.classList.remove("active");
-    console.log(currentActivePage);
+    currentActivePage!.ariaCurrent = "false";
+    currentActivePage!.classList.remove("active");
+    // console.log(currentActivePage); TODO:Remove
 
-    console.log(element);
+    // console.log(element); TODO:Remove
     element.classList.add("active");
-
-    //TODO: FINISH THIS
+    element.ariaCurrent = "page";
   }
 }

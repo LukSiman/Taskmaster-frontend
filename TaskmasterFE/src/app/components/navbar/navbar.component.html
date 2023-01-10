@@ -4,16 +4,16 @@
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" id="link1" aria-current="page" routerLink="/current" (click)="isMenuCollapsed = true">Main</a>
+          <a class="nav-link active" #main aria-current="page" routerLink="/current" (click)="isMenuCollapsed = true; makeActive(main)">Main</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" #link2 routerLink="calendar" (click)="isMenuCollapsed = true; makeActive(link2)">Calendar</a>
+          <a class="nav-link" #calendar aria-current="false" routerLink="calendar" (click)="isMenuCollapsed = true; makeActive(calendar)">Calendar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="link3" routerLink="#" (click)="isMenuCollapsed = true">Insights</a>
+          <a class="nav-link" #insights aria-current="false" routerLink="#" (click)="isMenuCollapsed = true">Insights</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="link4" routerLink="#" (click)="isMenuCollapsed = true">Settings</a>
+          <a class="nav-link" #settings aria-current="false" routerLink="#" (click)="isMenuCollapsed = true">Settings</a>
         </li>
       </ul>
     </div>
