@@ -11,7 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
-  { path: 'current', component: DayTasksComponent },
+  { path: 'main', component: DayTasksComponent },
   { path: 'calendar', component: CalendarComponent },
   // { path: 'insights', component: ProjectPageComponent },
   // { path: 'settings', component: ProjectPageComponent },

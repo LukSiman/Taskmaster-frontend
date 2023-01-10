@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { NavigationStart, Router, RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -18,19 +18,35 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // console.log(this.router.snapshot.url);
-    console.log(this.router.parseUrl(this.router.url).root.segments);
+    this.makeActive();
   }
 
   //adds active class to the nav item
-  makeActive(element: HTMLElement) {
-    let currentActivePage = document.querySelector(".active");
-    currentActivePage!.ariaCurrent = "false";
-    currentActivePage!.classList.remove("active");
-    // console.log(currentActivePage); TODO:Remove
+  makeActive(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        let url = event.url.slice(1);
+        let newPage = document.querySelector(`#${url}`);
 
-    // console.log(element); TODO:Remove
-    element.classList.add("active");
-    element.ariaCurrent = "page";
+        let currentActivePage = document.querySelector(".active");
+        currentActivePage!.ariaCurrent = "false";
+        currentActivePage!.classList.remove("active");
+
+        newPage!.classList.add("active");
+        newPage!.ariaCurrent = "page";
+      }
+    });
   }
+
+  //adds active class to the nav item
+  // makeActive(element: HTMLElement) {
+  // let currentActivePage = document.querySelector(".active");
+  // currentActivePage!.ariaCurrent = "false";
+  // currentActivePage!.classList.remove("active");
+  // // console.log(currentActivePage); TODO:Remove
+
+  // // console.log(element); TODO:Remove
+  // element.classList.add("active");
+  // element.ariaCurrent = "page";
+  // }
 }
