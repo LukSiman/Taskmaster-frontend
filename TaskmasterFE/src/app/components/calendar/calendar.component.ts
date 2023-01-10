@@ -33,7 +33,7 @@ export class CalendarComponent implements OnInit {
     await lastValueFrom(this.taskService.getTasks()).then(
       response => {
         this.tasks = response;
-        console.log(this.tasks);//TODO: DELETE
+        // console.log(this.tasks);//TODO: DELETE
       });
 
     return new Promise<void>(resolve => {
@@ -87,7 +87,7 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-    console.log(this.daysMap);//TODO: DELETE
+    // console.log(this.daysMap);//TODO: DELETE
   }
 
   //orders the map in ascending values
