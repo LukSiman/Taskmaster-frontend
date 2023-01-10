@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit {
 
   firstMonthDay: Date = new Date();
   lastMonthDay: Date = new Date();
+  today: string = "";
 
   constructor(private taskService: TaskService) { }
 
@@ -45,6 +46,7 @@ export class CalendarComponent implements OnInit {
   //TODO: month and year according to selected year and month
   createThisMonthCalendar(): void {
     let currentDate: Date = new Date();
+    this.today = currentDate.toDateString();
     let currentYear: number = currentDate.getFullYear();
     let currentMonth: number = currentDate.getMonth() + 1;
     let date: number = Date.parse(`${currentMonth}/01/${currentYear}`);
@@ -87,7 +89,7 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-    // console.log(this.daysMap);//TODO: DELETE
+    // console.log(this.daysMap); //TODO: DELETE
   }
 
   //orders the map in ascending values

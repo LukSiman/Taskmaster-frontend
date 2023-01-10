@@ -12,27 +12,48 @@
     </div>
     <div class="row" id="calendar">
         <div *ngFor="let day of daysMap | keyvalue: mapOrder" class="col p-0">
-            <div *ngIf="day.value.length <= 0; else elseBlock">
-                <div *ngIf="day.key.length == 1; else elseBlock">
+            <div *ngIf="day.value.length <= 0; else notEmpty">
+                <div *ngIf="day.key.length == 1; else notBlank">
                     <div class="border p-1 dayItem">
                     </div>
                 </div>
-                <ng-template #elseBlock>
-                    <div class="border p-1 dayItem">
-                        {{day.key | date:'d'}}
+                <ng-template #notBlank>
+                    <div *ngIf="day.key == today; else notToday">
+                        <div class="border border-dark p-1 dayItem">
+                            {{day.key | date:'d'}}
+                        </div>
                     </div>
+
+                    <ng-template #notToday>
+                        <div class="border p-1 dayItem">
+                            {{day.key | date:'d'}}
+                        </div>
+                    </ng-template>
                 </ng-template>
 
             </div>
-            <ng-template #elseBlock>
-                <div class="border p-1 dayItem position-relative">
-                    <div>
-                        {{day.key | date:'d'}}
-                    </div>
-                    <div class="position-absolute top-50 start-50 translate-middle">
-                        {{day.value.length}}
+            <ng-template #notEmpty>
+                <div *ngIf="day.key == today; else notToday">
+                    <div class="border border-dark p-1 dayItem position-relative">
+                        <div>
+                            {{day.key | date:'d'}}
+                        </div>
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                            {{day.value.length}}
+                        </div>
                     </div>
                 </div>
+
+                <ng-template #notToday>
+                    <div class="border p-1 dayItem position-relative">
+                        <div>
+                            {{day.key | date:'d'}}
+                        </div>
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                            {{day.value.length}}
+                        </div>
+                    </div>
+                </ng-template>
             </ng-template>
         </div>
     </div>
