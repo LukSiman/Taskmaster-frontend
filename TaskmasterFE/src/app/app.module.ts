@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DayTasksComponent } from './components/day-tasks/day-tasks.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { TaskBoxComponent } from './components/task-box/task-box.component';
 
 const routes: Routes = [
   { path: 'main', component: DayTasksComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
     AppComponent,
     FooterComponent,
     DayTasksComponent,
-    CalendarComponent
+    CalendarComponent,
+    TaskBoxComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

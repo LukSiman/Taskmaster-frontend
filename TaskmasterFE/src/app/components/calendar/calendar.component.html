@@ -19,13 +19,13 @@
                 </div>
                 <ng-template #notBlank>
                     <div *ngIf="day.key == today; else notToday">
-                        <div class="border border-dark p-1 dayItem">
+                        <div class="border border-dark p-1 dayItem" (click)="showTasks()">
                             {{day.key | date:'d'}}
                         </div>
                     </div>
 
                     <ng-template #notToday>
-                        <div class="border p-1 dayItem">
+                        <div class="border p-1 dayItem" (click)="showTasks()">
                             {{day.key | date:'d'}}
                         </div>
                     </ng-template>
@@ -34,7 +34,7 @@
             </div>
             <ng-template #notEmpty>
                 <div *ngIf="day.key == today; else notToday">
-                    <div class="border border-dark p-1 dayItem position-relative">
+                    <div class="border border-dark p-1 dayItem position-relative" (click)="showTasks()">
                         <div>
                             {{day.key | date:'d'}}
                         </div>
@@ -45,7 +45,7 @@
                 </div>
 
                 <ng-template #notToday>
-                    <div class="border p-1 dayItem position-relative">
+                    <div class="border p-1 dayItem position-relative" (click)="showTasks()">
                         <div>
                             {{day.key | date:'d'}}
                         </div>

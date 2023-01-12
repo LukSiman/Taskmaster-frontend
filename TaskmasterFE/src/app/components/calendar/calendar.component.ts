@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../../entities/task';
 import { lastValueFrom } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TaskBoxComponent } from '../task-box/task-box.component';
 
 @Component({
   selector: 'app-calendar',
@@ -17,7 +19,7 @@ export class CalendarComponent implements OnInit {
   lastMonthDay: Date = new Date();
   today: string = "";
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.start();
@@ -89,11 +91,16 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-    // console.log(this.daysMap); //TODO: DELETE
+    console.log(this.daysMap); //TODO: DELETE
   }
 
   //orders the map in ascending values
-  mapOrder(a: any, b: any) {
+  mapOrder(a: any, b: any): number {
     return 1;
+  }
+
+  //opens a modal with tasks and their control
+  showTasks(): void{
+    const modalRef = this.modalService.open(TaskBoxComponent);
   }
 }
