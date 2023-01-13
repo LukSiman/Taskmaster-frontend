@@ -1,5 +1,5 @@
 <ol class="list-group">
-    <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks">
+    <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks" (click)="openDetails(task)">
         <div *ngIf="task.taskNote != null; else noNote" class="col-11">
             <div class="pe-1">
                 <div class="fw-bold">{{ task.taskName }}</div>
