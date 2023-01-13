@@ -100,7 +100,9 @@ export class CalendarComponent implements OnInit {
   }
 
   //opens a modal with tasks and their control
-  showTasks(): void{
+  showTasks(date: string, tasks: Task[]): void{
     const modalRef = this.modalService.open(TaskBoxComponent);
+    modalRef.componentInstance.dayDate = date;
+    modalRef.componentInstance.dayTasks = tasks;    
   }
 }
