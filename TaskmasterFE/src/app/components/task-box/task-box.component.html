@@ -1,13 +1,18 @@
-<ol class="list-group list-group-numbered">
-    <li class="list-group-item d-flex" *ngFor="let task of dayTasks">
-        <div *ngIf="task.taskNote != null; else noNote">
-            <div class="ps-1">
+<ol class="list-group">
+    <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks">
+        <div *ngIf="task.taskNote != null; else noNote" class="col-11">
+            <div class="pe-1">
                 <div class="fw-bold">{{ task.taskName }}</div>
                 Note: {{ task.taskNote }}
             </div>
         </div>
+        <button type="button" class="btn btn-danger col">X</button>
         <ng-template #noNote>
-            <div class="fw-bold ps-1">{{ task.taskName }}</div>
+            <div class="fw-bold pe-1 col-11">{{ task.taskName }}</div>
         </ng-template>
     </li>
 </ol>
+
+<div class="d-grid">
+    <button type="button" class="btn btn-success m-2">Add task</button>
+</div>
