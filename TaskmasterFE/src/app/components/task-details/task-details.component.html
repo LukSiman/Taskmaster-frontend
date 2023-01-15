@@ -1,6 +1,9 @@
-<div class="p-2 px-3">
+
+<div class="p-2 px-3" id="details">
     <p>Name: {{ task.taskName }}</p>
     <p>Note: {{ task.taskNote }}</p>
-    <p>Start time: {{ task.taskStartTime | date:'HH:mm'}}</p>
-    <p class="mb-0">End time: {{ task.taskEndTime | date:'HH:mm'}}</p>
+    <div *ngIf="task.taskStartTime != task.taskEndTime">
+        <p>Start time: {{ task.taskStartTime | date:'HH:mm'}}</p>
+        <p>End time: {{ task.taskEndTime | date:'HH:mm'}}</p>
+    </div>
 </div>
