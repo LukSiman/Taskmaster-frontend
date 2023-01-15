@@ -15,7 +15,6 @@ export class TaskDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.task);
   }
 
 }

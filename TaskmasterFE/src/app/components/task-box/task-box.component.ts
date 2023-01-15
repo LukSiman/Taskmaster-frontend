@@ -24,6 +24,7 @@ export class TaskBoxComponent implements OnInit {
     console.log(this.dayTasks);
   }
 
+  //opens a modal that displays the details of a single task
   openDetails(task: Task): void {
     const modalRef = this.modalService.open(TaskDetailsComponent);
     modalRef.componentInstance.task = task;
