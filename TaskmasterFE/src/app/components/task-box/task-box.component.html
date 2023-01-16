@@ -1,5 +1,5 @@
 <ol class="list-group">
-    <li class="fw-bold text-center p-3 fs-5 text">{{ dayDate }}</li>
+    <li class="fw-bold text-center p-3 fs-5">{{ dayDate | date:'EEEE, MMMM d, y'}}</li>
     <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks" (click)="openDetails(task)">
         <div *ngIf="task.taskNote != null; else noNote" class="col-11">
             <div class="pe-1">
@@ -12,8 +12,9 @@
             <div class="fw-bold pe-1 col-11">{{ task.taskName }}</div>
         </ng-template>
     </li>
+    <li>
+        <div class="d-grid">
+            <button type="button" class="btn btn-success m-2">Add task</button>
+        </div>
+    </li>
 </ol>
-
-<div class="d-grid">
-    <button type="button" class="btn btn-success m-2">Add task</button>
-</div>

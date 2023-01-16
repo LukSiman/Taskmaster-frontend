@@ -1,9 +1,16 @@
-
-<div class="p-2 px-3" id="details">
-    <p>Name: {{ task.taskName }}</p>
-    <p>Note: {{ task.taskNote }}</p>
+<ol class="list-group">
+    <li class="list-group-item fw-bold">
+        {{ task.taskName }}
+    </li>
+    <li class="list-group-item" *ngIf="task.taskNote != null">
+        Note: {{ task.taskNote }}
+    </li>
     <div *ngIf="task.taskStartTime != task.taskEndTime">
-        <p>Start time: {{ task.taskStartTime | date:'HH:mm'}}</p>
-        <p>End time: {{ task.taskEndTime | date:'HH:mm'}}</p>
+        <li class="list-group-item">
+            Start time: {{ task.taskStartTime | date:'HH:mm'}}
+        </li>
+        <li class="list-group-item">
+            End time: {{ task.taskEndTime | date:'HH:mm'}}
+        </li>
     </div>
-</div>
+</ol>
