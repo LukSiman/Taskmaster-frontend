@@ -30,6 +30,9 @@ export class TaskBoxComponent implements OnInit {
     console.log(this.dayTasks);
   }
 
+  //TODO: Can't get tasks beyond current month
+
+
   /**
   Function that opens a modal to display details of a single task
   */

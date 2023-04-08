@@ -1,5 +1,5 @@
-<ol class="list-group">
-    <li class="fw-bold text-center p-3 fs-5">
+<ul class="list-group">
+    <li class="fw-bold text-center p-3 fs-5 list-group-item">
         <i class="bi bi-chevron-double-left" (click)="moveToPreviousDay()"></i> {{ dayDate | date:'EEEE, MMMM d, y'}}
         <i class="bi bi-chevron-double-right" (click)="moveToNextDay()"></i>
     </li>
@@ -15,9 +15,9 @@
             <div class="fw-bold pe-1 col-11">{{ task.taskName }}</div>
         </ng-template>
     </li>
-    <li>
+    <li class="list-group-item">
         <div class="d-grid">
             <button type="button" class="btn btn-success m-2">Add task</button>
         </div>
     </li>
-</ol>
+</ul>
