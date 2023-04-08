@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Task } from 'src/app/entities/task';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
@@ -13,7 +13,6 @@ import { TaskDetailsComponent } from '../task-details/task-details.component';
 Component for displaying a single day's tasks and details
 */
 export class TaskBoxComponent implements OnInit {
-
   // Input for the day's date
   @Input() dayDate: string = "";
 
@@ -26,8 +25,8 @@ export class TaskBoxComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.dayDate);
-    console.log(this.dayTasks);
+    // console.log(this.dayDate);// TODO: Delete
+    // console.log(this.dayTasks);// TODO: Delete
   }
 
   //TODO: Can't get tasks beyond current month
@@ -44,10 +43,10 @@ export class TaskBoxComponent implements OnInit {
   /**
   Function to move to the previous day
   */
-  moveToPreviousDay() {
+  moveToPreviousDay(): void {
     const previousDay: Date = new Date(this.dayDate);
     previousDay.setDate(previousDay.getDate() - 1);
-    console.log(previousDay);
+    // console.log(previousDay);// TODO: Delete
 
     // Update the day's date and tasks array with the previous day's data
     this.dayDate = previousDay.toDateString();
@@ -57,13 +56,27 @@ export class TaskBoxComponent implements OnInit {
   /**
   Function to move to the next day 
   */
-  moveToNextDay() {
+  moveToNextDay(): void {
     const nextDay: Date = new Date(this.dayDate);
     nextDay.setDate(nextDay.getDate() + 1);
-    console.log(nextDay);
+    // console.log(nextDay); // TODO: Delete
 
     // Update the day's date and tasks array with the next day's data
     this.dayDate = nextDay.toDateString();
     this.dayTasks = this.daysMap.get(this.dayDate)!;
+  }
+
+  /**
+  Listens to left and right arrow keyboard events and triggers previous and next day move functions
+  */
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (event.key === 'ArrowLeft') {
+      // If the left arrow key is pressed, move to the previous day
+      this.moveToPreviousDay();
+    } else if (event.key === 'ArrowRight') {
+      // If the right arrow key is pressed, move to the next day
+      this.moveToNextDay();
+    }
   }
 }

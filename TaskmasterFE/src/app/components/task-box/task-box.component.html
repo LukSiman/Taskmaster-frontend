@@ -1,8 +1,11 @@
 <ul class="list-group">
-    <li class="fw-bold text-center p-3 fs-5 list-group-item">
-        <i class="bi bi-chevron-double-left" (click)="moveToPreviousDay()"></i> {{ dayDate | date:'EEEE, MMMM d, y'}}
-        <i class="bi bi-chevron-double-right" (click)="moveToNextDay()"></i>
-    </li>
+    <!-- <div class="container"> -->
+        <li class="fw-bold text-center p-3 fs-5 list-group-item d-flex justify-content-between">
+            <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousDay()"></i>    
+            <div id="dateNavigation">{{ dayDate | date:'EEEE, MMMM d, y'}}</div>
+            <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextDay()"></i>
+        </li>
+    <!-- </div> -->
     <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks" (click)="openDetails(task)">
         <div *ngIf="task.taskNote != null; else noNote" class="col-11">
             <div class="pe-1">
