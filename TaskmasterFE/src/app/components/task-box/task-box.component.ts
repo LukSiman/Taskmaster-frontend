@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Task } from 'src/app/entities/task';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
@@ -22,15 +22,16 @@ export class TaskBoxComponent implements OnInit {
   // Input for a map of tasks for all days
   @Input() daysMap!: Map<string, Task[]>;
 
+  // Input for a call back function to change month to the previous 
+  @Input() monthChangePrev!: () => void;
+
+  // Input for a call back function to change month to the next 
+  @Input() monthChangeNext!: () => void;
+
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    // console.log(this.dayDate);// TODO: Delete
-    // console.log(this.dayTasks);// TODO: Delete
   }
-
-  //TODO: Can't get tasks beyond current month
-
 
   /**
   * Function that opens a modal to display details of a single task
@@ -46,7 +47,11 @@ export class TaskBoxComponent implements OnInit {
   moveToPreviousDay(): void {
     const previousDay: Date = new Date(this.dayDate);
     previousDay.setDate(previousDay.getDate() - 1);
-    // console.log(previousDay);// TODO: Delete
+
+    // check for month change and change it to the previous one
+    if (previousDay.getMonth() != new Date(this.dayDate).getMonth()) {
+      this.monthChangePrev();
+    }
 
     // Update the day's date and tasks array with the previous day's data
     this.dayDate = previousDay.toDateString();
@@ -59,7 +64,11 @@ export class TaskBoxComponent implements OnInit {
   moveToNextDay(): void {
     const nextDay: Date = new Date(this.dayDate);
     nextDay.setDate(nextDay.getDate() + 1);
-    // console.log(nextDay); // TODO: Delete
+
+    // check for month change and change it to the next one
+    if (nextDay.getMonth() != new Date(this.dayDate).getMonth()) {
+      this.monthChangeNext();
+    }
 
     // Update the day's date and tasks array with the next day's data
     this.dayDate = nextDay.toDateString();

@@ -151,13 +151,19 @@ export class CalendarComponent implements OnInit {
 
   /**
   * Opens a modal box displaying tasks for a given date
-  * Sets the dayDate and dayTasks properties of the TaskBoxComponent instance in the modal
   */
   showTasks(date: string, tasks: Task[]): void {
+    // Open a modal
     const modalRef = this.modalService.open(TaskBoxComponent);
+
+    // Pass the necessary inputs to the modal component
     modalRef.componentInstance.dayDate = date;
     modalRef.componentInstance.dayTasks = tasks;
     modalRef.componentInstance.daysMap = this.daysMap;
+
+    // Bind the parent component's methods to the modal component's inputs to allow for month change
+    modalRef.componentInstance.monthChangePrev = this.moveToPreviousMonth.bind(this);
+    modalRef.componentInstance.monthChangeNext = this.moveToNextMonth.bind(this);
   }
 
   /**
@@ -226,5 +232,10 @@ export class CalendarComponent implements OnInit {
 
     // populate the day map with tasks
     this.populateDayMap();
+  }
+
+
+  onChildEvent() {
+    console.log('Received data from child:');
   }
 }
