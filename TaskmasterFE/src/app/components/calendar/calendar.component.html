@@ -1,11 +1,13 @@
 <div class="container">
     <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
-        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousYear()"></i>  
+        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousYear()"></i>
         <div> {{ today | date:'y' }}</div>
         <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextYear()"></i>
     </div>
-    <div class="border text-center fw-bold fs-5">
-        {{ firstMonthDay | date:'MMMM' }}
+    <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
+        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousMonth()"></i>
+        <div>{{ today | date:'MMMM' }}</div>
+        <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextMonth()"></i>
     </div>
     <div class="row" id="calendar">
         <div *ngFor="let weekDay of daysOfTheWeek" class="border p-1 text-center fw-bold">

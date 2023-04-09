@@ -134,7 +134,7 @@ export class CalendarComponent implements OnInit {
 
       // Add task to the corresponding day's task array in the daysMap
       if (taskDate >= this.firstMonthDay && taskDate <= this.lastMonthDay) {
-        const dateString = taskDate.toDateString();
+        const dateString: string = taskDate.toDateString();
         const taskArray: Task[] = this.daysMap.get(dateString)!;
         taskArray.push(task);
       }
@@ -173,6 +173,9 @@ export class CalendarComponent implements OnInit {
 
     // create a new calendar with the updated date
     this.createCalendar(this.currentDate);
+
+    // populate the day map with tasks
+    this.populateDayMap();
   }
 
   /**
@@ -187,5 +190,42 @@ export class CalendarComponent implements OnInit {
 
     // create a new calendar with the updated date
     this.createCalendar(this.currentDate);
+
+    // populate the day map with tasks
+    this.populateDayMap();
+  }
+
+  /**
+    * Function to move to the previous month and create a new calendar with the updated date
+    */
+  moveToPreviousMonth(): void {
+    // subtract 1 from the current month
+    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+
+    // update the today property to reflect the new date
+    this.today = this.currentDate.toDateString();
+
+    // create a new calendar with the updated date
+    this.createCalendar(this.currentDate);
+
+    // populate the day map with tasks
+    this.populateDayMap();
+  }
+
+  /**
+  * Function to move to the next month and create a new calendar with the updated date
+  */
+  moveToNextMonth(): void {
+    // add 1 to the current month
+    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+
+    // update the today property to reflect the new date
+    this.today = this.currentDate.toDateString();
+
+    // create a new calendar with the updated date
+    this.createCalendar(this.currentDate);
+
+    // populate the day map with tasks
+    this.populateDayMap();
   }
 }
