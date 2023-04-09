@@ -38,7 +38,6 @@ export class CalendarComponent implements OnInit {
   //TODO: Delete tasks
   //TODO: Add task
   //TODO: Modify task
-  //TODO: display month and year according to selected year and month
 
   ngOnInit(): void {
     this.start();
@@ -82,21 +81,21 @@ export class CalendarComponent implements OnInit {
     this.today = currentDate.toDateString();
 
     // Set current year and month
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear: number = currentDate.getFullYear();
+    const currentMonth: number = currentDate.getMonth() + 1;
 
     // Create a new Date object for the first day of the month
-    const date = Date.parse(`${currentMonth}/01/${currentYear}`);
-    let day = new Date(date);
+    const date: number = Date.parse(`${currentMonth}/01/${currentYear}`);
+    let day: Date = new Date(date);
     this.firstMonthDay = new Date(date);
 
     // Get the last day of the month and its date
-    const lastDayOfMonth = new Date(currentYear, currentMonth, 0);
-    const lastDayOfMonthDate = lastDayOfMonth.getDate();
+    const lastDayOfMonth: Date = new Date(currentYear, currentMonth, 0);
+    const lastDayOfMonthDate: number = lastDayOfMonth.getDate();
     this.lastMonthDay = lastDayOfMonth;
 
     // Get the index of the first day of the month
-    let firstDayIndex = this.firstMonthDay.getDay() - 1;
+    let firstDayIndex: number = this.firstMonthDay.getDay() - 1;
     if (firstDayIndex === -1) {
       firstDayIndex = 6;
     }

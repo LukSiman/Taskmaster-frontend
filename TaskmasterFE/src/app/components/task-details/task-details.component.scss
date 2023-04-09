@@ -1,5 +1,10 @@
-#details {
-    :last-child {
-        margin-bottom: 0px;
+ol {
+    div {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        li:first-child {
+            border-top: none;
+        }
     }
 }
