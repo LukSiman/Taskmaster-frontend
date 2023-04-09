@@ -10,7 +10,7 @@ import { TaskDetailsComponent } from '../task-details/task-details.component';
 })
 
 /** 
-Component for displaying a single day's tasks and details
+* Component for displaying a single day's tasks and details
 */
 export class TaskBoxComponent implements OnInit {
   // Input for the day's date
@@ -33,7 +33,7 @@ export class TaskBoxComponent implements OnInit {
 
 
   /**
-  Function that opens a modal to display details of a single task
+  * Function that opens a modal to display details of a single task
   */
   openDetails(task: Task): void {
     const modalRef = this.modalService.open(TaskDetailsComponent);
@@ -41,7 +41,7 @@ export class TaskBoxComponent implements OnInit {
   }
 
   /**
-  Function to move to the previous day
+  * Function to move to the previous day
   */
   moveToPreviousDay(): void {
     const previousDay: Date = new Date(this.dayDate);
@@ -54,7 +54,7 @@ export class TaskBoxComponent implements OnInit {
   }
 
   /**
-  Function to move to the next day 
+  * Function to move to the next day 
   */
   moveToNextDay(): void {
     const nextDay: Date = new Date(this.dayDate);
@@ -67,7 +67,7 @@ export class TaskBoxComponent implements OnInit {
   }
 
   /**
-  Listens to left and right arrow keyboard events and triggers previous and next day move functions
+  * Listens to left and right arrow keyboard events and triggers previous and next day move functions
   */
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {

@@ -1,6 +1,8 @@
 <div class="container">
-    <div class="border text-center fw-bold fs-5">
-        {{ firstMonthDay | date:'y' }}
+    <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
+        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousYear()"></i>  
+        <div> {{ today | date:'y' }}</div>
+        <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextYear()"></i>
     </div>
     <div class="border text-center fw-bold fs-5">
         {{ firstMonthDay | date:'MMMM' }}

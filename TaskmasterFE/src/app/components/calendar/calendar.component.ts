@@ -26,8 +26,11 @@ export class CalendarComponent implements OnInit {
   // A Date object representing the last day of the current month.
   lastMonthDay: Date = new Date();
 
-  // A string representing today's date in the format "Day Month Date Year".
+  // A string representing today's date in the format "Weekday Month Day Year".
   today: string = "";
+
+  // A Date object representing the current full date
+  currentDate = new Date();
 
 
   constructor(private taskService: TaskService, private modalService: NgbModal) { }
@@ -35,24 +38,25 @@ export class CalendarComponent implements OnInit {
   //TODO: Delete tasks
   //TODO: Add task
   //TODO: Modify task
+  //TODO: display month and year according to selected year and month
 
   ngOnInit(): void {
     this.start();
   }
 
   /**
-  Asynchronous method that initializes the calendar view by creating this month's calendar,
-  retrieving all tasks, and populating the day map with the corresponding tasks.
+  * Asynchronous method that initializes the calendar view by creating this month's calendar,
+  * retrieving all tasks, and populating the day map with the corresponding tasks.
   */
   async start(): Promise<void> {
-    this.createThisMonthCalendar();
+    this.createCalendar(this.currentDate);
     await this.getAllTasks();
     this.populateDayMap();
   }
 
   /**
-  Retrieves all tasks from the server and stores them in the 'tasks' array.
-  @returns A Promise that resolves when the task data has been loaded and stored.
+  * Retrieves all tasks from the server and stores them in the 'tasks' array.
+  * @returns A Promise that resolves when the task data has been loaded and stored.
   */
   async getAllTasks(): Promise<void> {
     // Wait for the task service to return the list of tasks, then store them in the 'tasks' array.
@@ -68,13 +72,13 @@ export class CalendarComponent implements OnInit {
   }
 
   /**  
-  Initializes the current month's calendar by setting the component's today, firstMonthDay, and lastMonthDay properties.
-  Populates the daysMap property with empty arrays for the days before the first day of the month.
-  Populates the daysMap property with a Date string key for each day in the month, with an empty array value for each.
+  * Initializes the current month's calendar by setting the component's today, firstMonthDay, and lastMonthDay properties.
+  * Populates the daysMap property with empty arrays for the days before the first day of the month.
+  * Populates the daysMap property with a Date string key for each day in the month, with an empty array value for each.
   */
-  createThisMonthCalendar(): void {
+  createCalendar(currentDate: Date): void {
     // Get the current date and set today to current date as a string
-    const currentDate = new Date();
+    // const currentDate = new Date();
     this.today = currentDate.toDateString();
 
     // Set current year and month
@@ -91,11 +95,16 @@ export class CalendarComponent implements OnInit {
     const lastDayOfMonthDate = lastDayOfMonth.getDate();
     this.lastMonthDay = lastDayOfMonth;
 
-    // Get the index of the first day of the month and add empty arrays for the days before the first day of the month
+    // Get the index of the first day of the month
     let firstDayIndex = this.firstMonthDay.getDay() - 1;
     if (firstDayIndex === -1) {
       firstDayIndex = 6;
     }
+
+    // Empty the day map so it only has the selected month
+    this.daysMap = new Map();
+
+    // Add empty arrays for the days before the first day of the month
     for (let index = 0; index < firstDayIndex; index++) {
       this.daysMap.set(`${index}`, []);
     }
@@ -106,15 +115,13 @@ export class CalendarComponent implements OnInit {
       day = new Date(day);
       day.setDate(day.getDate() + 1);
     }
-
-    //TODO: month and year according to selected year and month
   }
 
   /**
-  Loops through the component's tasks array and for each task:
-  Extracts the year, month, and day from the task date string and creates a Date object.
-  If the task date falls within the current month (between firstMonthDay and lastMonthDay inclusive),
-  adds the task to the corresponding day's task array in the component's daysMap.
+  * Loops through the component's tasks array and for each task:
+  * Extracts the year, month, and day from the task date string and creates a Date object.
+  * If the task date falls within the current month (between firstMonthDay and lastMonthDay inclusive),
+  * adds the task to the corresponding day's task array in the component's daysMap.
   */
   populateDayMap(): void {
     this.tasks.forEach(task => {
@@ -136,20 +143,49 @@ export class CalendarComponent implements OnInit {
     console.log(this.daysMap); //TODO: DELETE
   }
 
-  //orders the map in ascending values
+  /**
+  * Orders the map in ascending values
+  */
   mapOrder(a: any, b: any): number {
     return 1;
   }
 
   /**
-  Opens a modal box displaying tasks for a given date
-  Sets the dayDate and dayTasks properties of the TaskBoxComponent instance in the modal
+  * Opens a modal box displaying tasks for a given date
+  * Sets the dayDate and dayTasks properties of the TaskBoxComponent instance in the modal
   */
   showTasks(date: string, tasks: Task[]): void {
     const modalRef = this.modalService.open(TaskBoxComponent);
     modalRef.componentInstance.dayDate = date;
     modalRef.componentInstance.dayTasks = tasks;
     modalRef.componentInstance.daysMap = this.daysMap;
-    //TODO: References to previous and next tasks for could move between days
+  }
+
+  /**
+  * Function to move to the previous year and create a new calendar with the updated date
+  */
+  moveToPreviousYear(): void {
+    // subtract 1 from the current year
+    this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
+
+    // update the today property to reflect the new date
+    this.today = this.currentDate.toDateString();
+
+    // create a new calendar with the updated date
+    this.createCalendar(this.currentDate);
+  }
+
+  /**
+  * Function to move to the next year and create a new calendar with the updated date
+  */
+  moveToNextYear(): void {
+    // add 1 to the current year
+    this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
+
+    // update the today property to reflect the new date
+    this.today = this.currentDate.toDateString();
+
+    // create a new calendar with the updated date
+    this.createCalendar(this.currentDate);
   }
 }
