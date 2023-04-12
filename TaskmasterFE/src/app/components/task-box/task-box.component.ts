@@ -28,7 +28,12 @@ export class TaskBoxComponent implements OnInit {
   // Input for a call back function to change month to the next 
   @Input() monthChangeNext!: () => void;
 
+  // Input for a call back function to update the daysMap
+  @Input() dayMapUpdate!: () => void;
+
   constructor(private modalService: NgbModal) { }
+
+  //TODO: Tasks do not get sent to the modal after month change
 
   ngOnInit(): void {
   }
@@ -51,6 +56,7 @@ export class TaskBoxComponent implements OnInit {
     // check for month change and change it to the previous one
     if (previousDay.getMonth() != new Date(this.dayDate).getMonth()) {
       this.monthChangePrev();
+      this.daysMap = this.dayMapUpdate()!;
     }
 
     // Update the day's date and tasks array with the previous day's data

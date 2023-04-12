@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../../entities/task';
 import { lastValueFrom } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TaskBoxComponent } from '../task-box/task-box.component';
 
 @Component({
@@ -139,7 +139,7 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-    console.log(this.daysMap); //TODO: DELETE
+    // console.log(this.daysMap); //TODO: DELETE
   }
 
   /**
@@ -164,6 +164,11 @@ export class CalendarComponent implements OnInit {
     // Bind the parent component's methods to the modal component's inputs to allow for month change
     modalRef.componentInstance.monthChangePrev = this.moveToPreviousMonth.bind(this);
     modalRef.componentInstance.monthChangeNext = this.moveToNextMonth.bind(this);
+    modalRef.componentInstance.dayMapUpdate = this.updateDayMap.bind(this);
+  }
+
+  updateDayMap(): Map<string, Task[]> {
+    return this.daysMap;
   }
 
   /**
