@@ -1,20 +1,28 @@
 <div class="container">
-    <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
-        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousYear()"></i>
-        <div> {{ today | date:'y' }}</div>
-        <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextYear()"></i>
+    <div class="row">
+        <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
+            <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousYear()"></i>
+            <div> {{ today | date:'y' }}</div>
+            <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextYear()"></i>
+        </div>
+        <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
+            <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousMonth()"></i>
+            <div>{{ today | date:'MMMM' }}</div>
+            <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextMonth()"></i>
+        </div>
     </div>
-    <div class="border text-center fw-bold fs-5 d-flex justify-content-between">
-        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousMonth()"></i>
-        <div>{{ today | date:'MMMM' }}</div>
-        <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextMonth()"></i>
-    </div>
-    <div class="row" id="calendar">
-        <div *ngFor="let weekDay of daysOfTheWeek" class="border p-1 text-center fw-bold">
+    <div class="row calendar">
+        <div *ngFor="let weekDay of daysOfTheWeek" class="border p-1 text-center fw-bold d-none d-md-block">
+            {{ weekDay }}
+        </div>
+        <div *ngFor="let weekDay of daysOfTheWeekTruncated" class="border p-1 text-center fw-bold d-none d-sm-block d-md-none">
+            {{ weekDay }}
+        </div>
+        <div *ngFor="let weekDay of daysOfTheWeekLetter" class="border p-1 text-center fw-bold d-block d-sm-none">
             {{ weekDay }}
         </div>
     </div>
-    <div class="row" id="calendar">
+    <div class="row calendar">
         <div *ngFor="let day of daysMap | keyvalue: mapOrder" class="col p-0">
             <div *ngIf="day.key.length == 1; else validDays">
                 <div class="border p-1 dayItem"></div>

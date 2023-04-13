@@ -11,22 +11,28 @@ import { TaskBoxComponent } from '../task-box/task-box.component';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  // An array to store tasks.
+  // An array to store tasks
   tasks: Task[] = [];
 
-  // A Map to store tasks for each day, with the key being the date string.
+  // A Map to store tasks for each day, with the key being the date string
   daysMap: Map<string, Task[]> = new Map();
 
-  // An array of days of the week, starting with Monday.
+  // An array of days of the week, starting with Monday
   daysOfTheWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-  // A Date object representing the first day of the current month.
+  // An array of truncated days of the week, starting with Monday
+  daysOfTheWeekTruncated: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  // An array of truncated days of the week to 1 or 2 letters, starting with Monday
+  daysOfTheWeekLetter: string[] = ["M", "Tu", "W", "Th", "F", "S", "Su"];
+
+  // A Date object representing the first day of the current month
   firstMonthDay: Date = new Date();
 
-  // A Date object representing the last day of the current month.
+  // A Date object representing the last day of the current month
   lastMonthDay: Date = new Date();
 
-  // A string representing today's date in the format "Weekday Month Day Year".
+  // A string representing today's date in the format "Weekday Month Day Year"
   today: string = "";
 
   // A Date object representing the current full date
