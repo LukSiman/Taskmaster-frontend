@@ -33,8 +33,6 @@ export class TaskBoxComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  //TODO: Tasks do not get sent to the modal after month change
-
   ngOnInit(): void {
   }
 
@@ -74,6 +72,7 @@ export class TaskBoxComponent implements OnInit {
     // check for month change and change it to the next one
     if (nextDay.getMonth() != new Date(this.dayDate).getMonth()) {
       this.monthChangeNext();
+      this.daysMap = this.dayMapUpdate()!;
     }
 
     // Update the day's date and tasks array with the next day's data
