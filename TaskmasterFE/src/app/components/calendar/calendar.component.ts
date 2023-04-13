@@ -38,7 +38,6 @@ export class CalendarComponent implements OnInit {
   // A Date object representing the current full date
   currentDate = new Date();
 
-
   constructor(private taskService: TaskService, private modalService: NgbModal) { }
 
   //TODO: Delete tasks
@@ -173,6 +172,7 @@ export class CalendarComponent implements OnInit {
     modalRef.componentInstance.dayMapUpdate = this.updateDayMap.bind(this);
   }
 
+  // returns the current date map, helper for the task modal
   updateDayMap(): Map<string, Task[]> {
     return this.daysMap;
   }
@@ -243,10 +243,5 @@ export class CalendarComponent implements OnInit {
 
     // populate the day map with tasks
     this.populateDayMap();
-  }
-
-
-  onChildEvent() {
-    console.log('Received data from child:');
   }
 }

@@ -6,12 +6,12 @@
         </li>
     <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks" (click)="openDetails(task)">
         <div *ngIf="task.taskNote != null; else noNote" class="col-11">
-            <div class="pe-1">
+            <div class="pe-2">
                 <div class="fw-bold">{{ task.taskName }}</div>
                 Note: {{ task.taskNote }}
             </div>
         </div>
-        <button type="button" class="btn btn-danger col">X</button>
+        <button type="button" class="btn btn-danger col" (click)="deleteTask(task.taskUUID)">X</button>
         <ng-template #noNote>
             <div class="fw-bold pe-1 col-11">{{ task.taskName }}</div>
         </ng-template>

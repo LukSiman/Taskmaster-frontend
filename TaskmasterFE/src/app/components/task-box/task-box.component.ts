@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Task } from 'src/app/entities/task';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task-box',
@@ -31,7 +32,7 @@ export class TaskBoxComponent implements OnInit {
   // Input for a call back function to update the daysMap
   @Input() dayMapUpdate!: () => void;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private taskService: TaskService) { }
 
   ngOnInit(): void {
   }
@@ -92,5 +93,14 @@ export class TaskBoxComponent implements OnInit {
       // If the right arrow key is pressed, move to the next day
       this.moveToNextDay();
     }
+  }
+
+  /**
+ * Deletes the selected task
+ */
+  deleteTask(uuid: string): void {
+    console.log(uuid);
+    console.log(this.taskService.deleteTask(uuid));
+    this.taskService.deleteTask(uuid);
   }
 }
