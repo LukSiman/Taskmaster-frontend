@@ -44,7 +44,7 @@ export class TaskService {
    * This functions deletes a Task by it's UUID from the database
    */
   deleteTask(uuid: string): Observable<string> {
-    let deleteUrl = `${this.baseUrl}/${uuid}`;
+    const deleteUrl = `${this.baseUrl}/${uuid}`;
     return this.httpClient.delete(deleteUrl, { responseType: 'text' });
   }
 }

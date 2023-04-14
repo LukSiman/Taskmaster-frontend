@@ -99,8 +99,8 @@ export class TaskBoxComponent implements OnInit {
  * Deletes the selected task
  */
   deleteTask(uuid: string): void {
-    console.log(uuid);
-    console.log(this.taskService.deleteTask(uuid));
-    this.taskService.deleteTask(uuid);
+    this.taskService.deleteTask(uuid).subscribe((response: string) => {
+      console.log(response)
+    });
   }
 }

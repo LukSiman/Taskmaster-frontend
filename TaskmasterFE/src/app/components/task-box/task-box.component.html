@@ -1,14 +1,14 @@
 <ul class="list-group">
-        <li class="fw-bold text-center p-3 fs-5 list-group-item d-flex justify-content-between">
-            <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousDay()"></i>    
-            <div>{{ dayDate | date:'EEEE, MMMM d, y'}}</div>
-            <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextDay()"></i>
-        </li>
-    <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks" (click)="openDetails(task)">
+    <li class="fw-bold text-center p-3 fs-5 list-group-item d-flex justify-content-between">
+        <i class="bi bi-chevron-double-left ps-5" (click)="moveToPreviousDay()"></i>
+        <div>{{ dayDate | date:'EEEE, MMMM d, y'}}</div>
+        <i class="bi bi-chevron-double-right pe-5" (click)="moveToNextDay()"></i>
+    </li>
+    <li class="list-group-item d-flex align-items-center" *ngFor="let task of dayTasks">
         <div *ngIf="task.taskNote != null; else noNote" class="col-11">
-            <div class="pe-2">
+            <div class="pe-2" (click)="openDetails(task)" id="taskInformation">
                 <div class="fw-bold">{{ task.taskName }}</div>
-                Note: {{ task.taskNote }}
+                <div>Note: {{ task.taskNote }}</div>
             </div>
         </div>
         <button type="button" class="btn btn-danger col" (click)="deleteTask(task.taskUUID)">X</button>
