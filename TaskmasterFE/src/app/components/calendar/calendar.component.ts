@@ -170,6 +170,11 @@ export class CalendarComponent implements OnInit {
     modalRef.componentInstance.monthChangePrev = this.moveToPreviousMonth.bind(this);
     modalRef.componentInstance.monthChangeNext = this.moveToNextMonth.bind(this);
     modalRef.componentInstance.dayMapUpdate = this.updateDayMap.bind(this);
+
+    // Subscribes to the 'itemDeleted' event emitted by the modal and calls 'start' function
+    modalRef.componentInstance.itemDeleted.subscribe(() => {
+      this.start();
+    });
   }
 
   // returns the current date map, helper for the task modal

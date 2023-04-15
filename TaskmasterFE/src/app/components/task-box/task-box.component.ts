@@ -32,6 +32,9 @@ export class TaskBoxComponent implements OnInit {
   // Input for a call back function to update the daysMap
   @Input() dayMapUpdate!: () => void;
 
+  // Output for item deletion event
+  @Output() itemDeleted = new EventEmitter<boolean>();
+
   constructor(private modalService: NgbModal, private taskService: TaskService) { }
 
   ngOnInit(): void {
@@ -96,11 +99,19 @@ export class TaskBoxComponent implements OnInit {
   }
 
   /**
- * Deletes the selected task
- */
+  * Function to delete a task from the backend
+  */
   deleteTask(uuid: string): void {
-    this.taskService.deleteTask(uuid).subscribe((response: string) => {
-      console.log(response)
+    // Delete the task using the taskService and update the daysMap and dayTasks after success
+    this.taskService.deleteTask(uuid).subscribe(() => {
+      // Emit an event to notify the parent component about the item deletion
+      this.itemDeleted.emit(true);
+
+      // Update the daysMap after deletion
+      this.daysMap = this.dayMapUpdate()!;
+
+      // Update the dayTasks for the current dayDate after deletion
+      this.dayTasks = this.daysMap.get(this.dayDate)!;
     });
   }
 }
