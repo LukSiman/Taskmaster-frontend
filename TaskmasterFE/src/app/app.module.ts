@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TaskBoxComponent } from './components/task-box/task-box.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { CreateTaskBoxComponent } from './components/create-task-box/create-task-box.component';
 
 const routes: Routes = [
   { path: 'main', component: DayTasksComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
     DayTasksComponent,
     CalendarComponent,
     TaskBoxComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    CreateTaskBoxComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

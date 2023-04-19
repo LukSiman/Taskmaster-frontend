@@ -40,10 +40,6 @@ export class CalendarComponent implements OnInit {
 
   constructor(private taskService: TaskService, private modalService: NgbModal) { }
 
-  //TODO: Delete tasks
-  //TODO: Add task
-  //TODO: Modify task
-
   ngOnInit(): void {
     this.start();
   }

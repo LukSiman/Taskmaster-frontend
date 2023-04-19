@@ -3,12 +3,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Task } from 'src/app/entities/task';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { TaskService } from 'src/app/services/task.service';
+import { CreateTaskBoxComponent } from '../create-task-box/create-task-box.component';
 
 @Component({
   selector: 'app-task-box',
   templateUrl: './task-box.component.html',
   styleUrls: ['./task-box.component.scss']
 })
+
+
+
+//TODO: Add task
+//TODO: Modify task
 
 /** 
 * Component for displaying a single day's tasks and details
@@ -113,5 +119,12 @@ export class TaskBoxComponent implements OnInit {
       // Update the dayTasks for the current dayDate after deletion
       this.dayTasks = this.daysMap.get(this.dayDate)!;
     });
+  }
+
+  /**
+  * Function that opens a new modal for adding new tasks
+  */
+  openAddTaskBox() {
+    this.modalService.open(CreateTaskBoxComponent);
   }
 }
