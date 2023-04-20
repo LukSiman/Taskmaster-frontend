@@ -1,10 +1,10 @@
-<div class="container p-3">
+<form [formGroup]="newTaskForm" class="container p-3">
     <div class="row mb-3">
         <div class="col-3">
             <label for="taskName" class="col-form-label">Name:</label>
         </div>
         <div class="col">
-            <input type="text" class="form-control" id="taskName" value="Name of the task">
+            <input type="text" class="form-control" id="taskName" value="Name of the task" formControlName="taskName">
         </div>
     </div>
 
@@ -13,7 +13,7 @@
             <label for="taskDate" class="col-form-label">Date:</label>
         </div>
         <div class="col">
-            <input type="date" class="form-control" id="taskDate">
+            <input type="date" class="form-control" id="taskDate" formControlName="taskDate">
         </div>
     </div>
 
@@ -22,7 +22,7 @@
             <label for="startTime" class="col-form-label">Start time:</label>
         </div>
         <div class="col">
-            <input type="time" class="form-control" id="startTime">
+            <input type="time" class="form-control" id="startTime" formControlName="startTime">
         </div>
     </div>
 
@@ -31,7 +31,7 @@
             <label for="endTime" class="col-form-label">End time:</label>
         </div>
         <div class="col">
-            <input type="time" class="form-control" id="endTime">
+            <input type="time" class="form-control" id="endTime" formControlName="endTime">
         </div>
     </div>
 
@@ -40,7 +40,11 @@
             <label for="taskNote" class="col-form-label">Note:</label>
         </div>
         <div class="col">
-            <textarea class="form-control" id="taskNote" rows="2" placeholder="Write a short note..."></textarea>
+            <textarea class="form-control" id="taskNote" rows="2" placeholder="Write a short note..." formControlName="taskNote"></textarea>
         </div>
     </div>
-</div>
+
+    <div class="d-grid">
+        <button type="button" class="btn btn-success">Add task</button>
+    </div>
+</form>
