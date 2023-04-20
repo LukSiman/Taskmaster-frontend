@@ -1,5 +1,5 @@
 <ol class="list-group">
-    <li class="list-group-item fw-bold">
+    <li class="list-group-item fw-bold p-3">
         {{ task.taskName }}
     </li>
     <li class="list-group-item" *ngIf="task.taskNote != null">
@@ -13,9 +13,9 @@
             End time: {{ task.taskEndTime | date:'HH:mm'}}
         </li>
     </div>
-    <li class="list-group-item">
+    <li class="list-group-item p-3">
         <div class="d-grid">
-            <button type="button" class="btn btn-primary m-2">Modify task</button>
+            <button type="button" class="btn btn-primary">Modify task</button>
         </div>
     </li>
 </ol>
