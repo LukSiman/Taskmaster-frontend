@@ -8,12 +8,11 @@
                 formControlName="taskName">
         </div>
 
-        <div *ngIf="taskName!.invalid && (taskName!.dirty || taskName!.touched)" class="alert alert-danger">
+        <div *ngIf="taskName?.invalid && (taskName?.dirty || taskName?.touched)" class="alert alert-danger p-2 m-0">
             <small *ngIf="taskName?.errors?.['required']">Name is required.</small>
             <small *ngIf="taskName?.errors?.['minlength']">Name must be at least 2 characters long.</small>
-            <small *ngIf="taskName!.errors?.['maxlength']">Name must not be longer than 50 characters.</small>
+            <small *ngIf="taskName?.errors?.['maxlength']">Name must not be longer than 50 characters.</small>
         </div>
-
     </div>
 
     <div class="row mb-3">
@@ -22,6 +21,10 @@
         </div>
         <div class="col">
             <input type="date" class="form-control" id="taskDate" formControlName="taskDate">
+        </div>
+
+        <div *ngIf="taskDate?.invalid && (taskDate?.dirty || taskDate?.touched)" class="alert alert-danger p-2 m-0">
+            <small *ngIf="taskName?.errors?.['required']">Name is required.</small>
         </div>
     </div>
 
@@ -50,6 +53,10 @@
         <div class="col">
             <textarea class="form-control" id="taskNote" rows="2" placeholder="Write a short note..."
                 formControlName="taskNote"></textarea>
+        </div>
+
+        <div *ngIf="taskNote?.invalid && (taskNote?.dirty || taskNote?.touched)" class="alert alert-danger p-2 m-0">
+            <small *ngIf="taskNote?.errors?.['maxlength']">Note must not be longer than 200 characters.</small>
         </div>
     </div>
 
