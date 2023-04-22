@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-task-box',
@@ -9,11 +9,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class CreateTaskBoxComponent implements OnInit {
 
   newTaskForm = new FormGroup({
-    taskName: new FormControl(''),
-    taskDate: new FormControl(''),
+    taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+    taskDate: new FormControl('', Validators.required),
     startTime: new FormControl(''),
     endTime: new FormControl(''),
-    taskNote: new FormControl('')
+    taskNote: new FormControl('', Validators.maxLength(200))
   });
 
   //TODO: Add validation
@@ -32,8 +32,43 @@ export class CreateTaskBoxComponent implements OnInit {
   }
 
   /**
-   * Function to get the current local date in the required YYYY-MM-DD format:
+   * Returns taskName variable of the newTaskForm form
    */
+  get taskName() {
+    return this.newTaskForm.get('taskName');
+  }
+
+  /**
+  * Returns taskDate variable of the newTaskForm form
+  */
+  get taskDate() {
+    return this.newTaskForm.get('taskDate');
+  }
+
+  /**
+  * Returns startTime variable of the newTaskForm form
+  */
+  get startTime() {
+    return this.newTaskForm.get('startTime');
+  }
+
+  /**
+   * Returns endTime variable of the newTaskForm form
+  */
+  get endTime() {
+    return this.newTaskForm.get('endTime');
+  }
+
+  /**
+  * Returns taskNote variable of the newTaskForm form
+  */
+  get taskNote() {
+    return this.newTaskForm.get('taskNote');
+  }
+
+  /**
+  * Function to get the current local date in the required YYYY-MM-DD format:
+  */
   getCurrentLocalDate(): string {
     const currentDate = new Date();
     const localDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
