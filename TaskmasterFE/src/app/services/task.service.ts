@@ -52,6 +52,8 @@ export class TaskService {
   */
   saveNewTask(task: Task): string {
     const saveUrl = `${this.baseUrl}/save`;
+
+    console.log(task);
     this.httpClient.post(saveUrl, task).subscribe((response) => {
       console.log(response);
     });

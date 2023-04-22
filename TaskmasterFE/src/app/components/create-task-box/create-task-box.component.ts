@@ -76,7 +76,7 @@ export class CreateTaskBoxComponent implements OnInit {
   /**
   * Function to get the current local date in the required YYYY-MM-DD format:
   */
-  getCurrentLocalDate(): string {
+  private getCurrentLocalDate(): string {
     const currentDate = new Date();
     const localDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
     return localDate.toISOString().substring(0, 10);
@@ -85,7 +85,7 @@ export class CreateTaskBoxComponent implements OnInit {
   /**
   * Function to get the current time and return a string
   */
-  getCurrentTime(): string {
+  private getCurrentTime(): string {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -103,8 +103,6 @@ export class CreateTaskBoxComponent implements OnInit {
       return;
     }
 
-    console.log("???");
-
     //save the task to DB
     this.saveNewTask();
   }
@@ -112,7 +110,7 @@ export class CreateTaskBoxComponent implements OnInit {
   /**
   * Saves a new task using the TaskService and returns a response message.
   */
-  saveNewTask(): string {
+  private saveNewTask(): string {
     // creates a new task to send to the backend
     const newTask: Task = {
       taskName: this.taskName?.value,
@@ -126,8 +124,21 @@ export class CreateTaskBoxComponent implements OnInit {
       taskStatus: 0
     };
 
-    console.log(newTask);
+    //changes time format if nothing was entered
+    // newTask.taskStartTime = this.checkTimeFormat(newTask.taskStartTime);
+
+    //TODO: Fix backend LocalDateTime issues
+
+    //Sends task object and gets a response
     const responseMessage: string = this.taskService.saveNewTask(newTask);
     return responseMessage;
+  }
+
+  // checks if time is in right format
+  private checkTimeFormat(time: string): string {
+    if (time === "") {
+      return "00:00:00";
+    }
+    return time;
   }
 }
