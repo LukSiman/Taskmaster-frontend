@@ -60,7 +60,18 @@
         </div>
     </div>
 
+    <div class="row mb-3">
+        <div class="col-3">
+            <label for="category" class="col-form-label">Category:</label>
+        </div>
+        <div class="col">
+            <select class="form-select" id="category" formControlName="category">
+                <option *ngFor="let category of categoryOptions" [value]="category">{{ category }}</option>
+            </select>
+        </div>
+    </div>
+
     <div class="d-grid">
-        <button type="button" class="btn btn-success">Add task</button>
+        <button type="submit" class="btn btn-success">Add task</button>
     </div>
 </form>

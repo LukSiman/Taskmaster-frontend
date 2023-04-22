@@ -12,19 +12,22 @@ export class CreateTaskBoxComponent implements OnInit {
   // Form group variable declaration
   newTaskForm!: FormGroup;
 
+  //Array with category options
+  categoryOptions: string[] = ['Work', 'Entertainment', 'Sleep', 'Fitness', 'Education', 'Medical', 'Food', 'Shopping', 'Household', 'Beauty', 'Travel', 'Other'];
+
   //TODO: Add actual saving on DB
 
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-
     //initializing form group with control and validation
     this.newTaskForm = new FormGroup({
       taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
       startTime: new FormControl(''),
       endTime: new FormControl(''),
-      taskNote: new FormControl('', Validators.maxLength(200))
+      taskNote: new FormControl('', Validators.maxLength(200)),
+      category: new FormControl('Other'),
     });
   }
 
@@ -64,6 +67,13 @@ export class CreateTaskBoxComponent implements OnInit {
   }
 
   /**
+  * Returns category variable of the newTaskForm form
+  */
+  get category() {
+    return this.newTaskForm.get('category');
+  }
+
+  /**
   * Function to get the current local date in the required YYYY-MM-DD format:
   */
   getCurrentLocalDate(): string {
@@ -92,13 +102,32 @@ export class CreateTaskBoxComponent implements OnInit {
       this.newTaskForm.markAllAsTouched();
       return;
     }
+
+    console.log("???");
+
+    //save the task to DB
+    this.saveNewTask();
   }
 
   /**
   * Saves a new task using the TaskService and returns a response message.
   */
-  saveNewTask(task: Task): string {
-    const responseMessage: string = this.taskService.saveNewTask(task);
+  saveNewTask(): string {
+    // creates a new task to send to the backend
+    const newTask: Task = {
+      taskName: this.taskName?.value,
+      taskDate: this.taskDate?.value,
+      taskNote: this.taskNote?.value,
+      taskStartTime: this.startTime?.value,
+      taskEndTime: this.endTime?.value,
+      categoryName: this.category?.value,
+      taskUUID: '',
+      taskOrder: 0,
+      taskStatus: 0
+    };
+
+    console.log(newTask);
+    const responseMessage: string = this.taskService.saveNewTask(newTask);
     return responseMessage;
   }
 }

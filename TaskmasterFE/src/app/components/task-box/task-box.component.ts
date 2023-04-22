@@ -12,7 +12,6 @@ import { CreateTaskBoxComponent } from '../create-task-box/create-task-box.compo
 })
 
 
-
 //TODO: Add task
 //TODO: Modify task
 
