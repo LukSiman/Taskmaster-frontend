@@ -19,7 +19,6 @@ export interface Task {
   providedIn: 'root'
 })
 export class TaskService {
-
   //backend url for task object JSONs
   private baseUrl = `${environment.backendUrl}/tasks`;
 
@@ -46,5 +45,17 @@ export class TaskService {
   deleteTask(uuid: string): Observable<string> {
     const deleteUrl = `${this.baseUrl}/${uuid}`;
     return this.httpClient.delete(deleteUrl, { responseType: 'text' });
+  }
+
+  /**
+  * This functions saves the provided task to the DB
+  */
+  saveNewTask(task: Task): string {
+    const saveUrl = `${this.baseUrl}/save`;
+    this.httpClient.post(saveUrl, task).subscribe((response) => {
+      console.log(response);
+    });
+    const confirmation = "";
+    return confirmation;
   }
 }

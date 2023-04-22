@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Task } from 'src/app/entities/task';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-create-task-box',
@@ -7,15 +9,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create-task-box.component.scss']
 })
 export class CreateTaskBoxComponent implements OnInit {
+  // Form group variable declaration
   newTaskForm!: FormGroup;
 
-
-  //TODO: Add validation
   //TODO: Add actual saving on DB
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+
+    //initializing form group with control and validation
     this.newTaskForm = new FormGroup({
       taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
@@ -89,5 +92,13 @@ export class CreateTaskBoxComponent implements OnInit {
       this.newTaskForm.markAllAsTouched();
       return;
     }
+  }
+
+  /**
+  * Saves a new task using the TaskService and returns a response message.
+  */
+  saveNewTask(task: Task): string {
+    const responseMessage: string = this.taskService.saveNewTask(task);
+    return responseMessage;
   }
 }
