@@ -7,14 +7,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create-task-box.component.scss']
 })
 export class CreateTaskBoxComponent implements OnInit {
+  newTaskForm!: FormGroup;
 
-  newTaskForm = new FormGroup({
-    taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-    taskDate: new FormControl('', Validators.required),
-    startTime: new FormControl(''),
-    endTime: new FormControl(''),
-    taskNote: new FormControl('', Validators.maxLength(200))
-  });
 
   //TODO: Add validation
   //TODO: Add actual saving on DB
@@ -22,12 +16,12 @@ export class CreateTaskBoxComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.newTaskForm.setValue({
-      taskName: 'Name of the task',
-      taskDate: this.getCurrentLocalDate(),
-      startTime: this.getCurrentTime(),
-      endTime: this.getCurrentTime(),
-      taskNote: null
+    this.newTaskForm = new FormGroup({
+      taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]),
+      taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
+      startTime: new FormControl(''),
+      endTime: new FormControl(''),
+      taskNote: new FormControl('', Validators.maxLength(200))
     });
   }
 
@@ -84,5 +78,16 @@ export class CreateTaskBoxComponent implements OnInit {
     const minutes = String(now.getMinutes()).padStart(2, '0');
 
     return `${hours}:${minutes}`;
+  }
+
+  /**
+  * Checks if the form has been entered correctly
+  */
+  checkForm(): void {
+    // required field check
+    if (this.newTaskForm.invalid) {
+      this.newTaskForm.markAllAsTouched();
+      return;
+    }
   }
 }
