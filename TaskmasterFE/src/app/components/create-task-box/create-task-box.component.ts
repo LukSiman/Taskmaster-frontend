@@ -17,7 +17,7 @@ export class CreateTaskBoxComponent implements OnInit {
 
   ngOnInit(): void {
     this.newTaskForm = new FormGroup({
-      taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]),
+      taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
       startTime: new FormControl(''),
       endTime: new FormControl(''),

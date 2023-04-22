@@ -9,10 +9,9 @@
         </div>
 
         <div *ngIf="taskName!.invalid && (taskName!.dirty || taskName!.touched)" class="alert alert-danger">
-            <small *ngIf="taskName!.errors?.['required']">Name is required.</small>
-            <small *ngIf="taskName!.errors?.['minlength']">Name must be at least 2 characters long.</small>
-            <small *ngIf="taskName!.errors?.['maxLength']">Name must be at least 2 characters long.</small>
-            <!-- <small *ngIf="taskName!.errors?.['maxLength']">Name must not be longer than 50 characters.</small> -->
+            <small *ngIf="taskName?.errors?.['required']">Name is required.</small>
+            <small *ngIf="taskName?.errors?.['minlength']">Name must be at least 2 characters long.</small>
+            <small *ngIf="taskName!.errors?.['maxlength']">Name must not be longer than 50 characters.</small>
         </div>
 
     </div>
