@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export interface Task {
@@ -50,14 +50,29 @@ export class TaskService {
   /**
   * This functions saves the provided task to the DB
   */
-  saveNewTask(task: Task): string {
+  saveNewTask(task: Task): Observable<Object>  {
     const saveUrl = `${this.baseUrl}/save`;
 
-    console.log(task);
-    this.httpClient.post(saveUrl, task).subscribe((response) => {
-      console.log(response);
-    });
-    const confirmation = "";
-    return confirmation;
+    console.log(task); //TODO: Delete
+
+    return this.httpClient.post(saveUrl, task).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+  * Handles error messages
+  */
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An error occurred!';
+    console.log(error);//TODO: Delete
+    if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `${error.error}`;
+    }
+    return throwError(() => new Error(errorMessage));
   }
 }

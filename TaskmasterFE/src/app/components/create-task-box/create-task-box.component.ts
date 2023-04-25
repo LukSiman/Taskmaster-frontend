@@ -12,6 +12,9 @@ export class CreateTaskBoxComponent implements OnInit {
   // Form group variable declaration
   newTaskForm!: FormGroup;
 
+  //Error message
+  errorMessage: string = '';
+
   //Array with category options
   categoryOptions: string[] = ['Work', 'Entertainment', 'Sleep', 'Fitness', 'Education', 'Medical', 'Food', 'Shopping', 'Household', 'Beauty', 'Travel', 'Other'];
 
@@ -110,7 +113,7 @@ export class CreateTaskBoxComponent implements OnInit {
   /**
   * Saves a new task using the TaskService and returns a response message.
   */
-  private saveNewTask(): string {
+  private saveNewTask(): void {
     // creates a new task to send to the backend
     const newTask: Task = {
       taskName: this.taskName?.value,
@@ -130,8 +133,17 @@ export class CreateTaskBoxComponent implements OnInit {
     //TODO: Fix backend LocalDateTime issues
 
     //Sends task object and gets a response
-    const responseMessage: string = this.taskService.saveNewTask(newTask);
-    return responseMessage;
+    this.taskService.saveNewTask(newTask).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.errorMessage = '';
+      },
+      error: (err) => {
+        console.log(err);
+        this.errorMessage = err;
+      },
+      complete: () => console.log('Success')
+    });
   }
 
   // checks if time is in right format

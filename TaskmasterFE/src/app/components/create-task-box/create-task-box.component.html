@@ -71,6 +71,10 @@
         </div>
     </div>
 
+    <div *ngIf="errorMessage" class="alert alert-danger p-2 m-0 mb-2">
+        {{ errorMessage }}
+    </div>
+
     <div class="d-grid">
         <button type="submit" class="btn btn-success">Add task</button>
     </div>
