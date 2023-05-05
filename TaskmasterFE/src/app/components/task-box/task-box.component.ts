@@ -125,6 +125,7 @@ export class TaskBoxComponent implements OnInit {
   * Function that opens a new modal for adding new tasks
   */
   openAddTaskBox() {
-    this.modalService.open(CreateTaskBoxComponent);
+    const modalRef = this.modalService.open(CreateTaskBoxComponent);
+    modalRef.componentInstance.dayDate = this.dayDate;
   }
 }
