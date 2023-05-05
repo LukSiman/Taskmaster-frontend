@@ -13,7 +13,7 @@
         </div>
         <button type="button" class="btn btn-danger col" (click)="deleteTask(task.taskUUID)">X</button>
         <ng-template #noNote>
-            <div class="fw-bold pe-1 col-11">{{ task.taskName }}</div>
+            <div class="fw-bold pe-1 col-11" (click)="openDetails(task)" id="taskInformation">{{ task.taskName }}</div>
         </ng-template>
     </li>
     <li class="list-group-item p-3">
