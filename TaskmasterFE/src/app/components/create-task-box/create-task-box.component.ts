@@ -137,7 +137,6 @@ export class CreateTaskBoxComponent implements OnInit {
     //TODO: Fix backend LocalDateTime issues
     //TODO: Update calendar count and taskBox after adding new task
     //TODO: Default date should be of the selected day when adding
-    //TODO: End date should be empty if not entered
 
 
     //Sends task object and gets a response

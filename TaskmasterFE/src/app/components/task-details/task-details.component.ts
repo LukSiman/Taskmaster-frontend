@@ -12,9 +12,22 @@ export class TaskDetailsComponent implements OnInit {
   @Input()
   task: Task = new Task;
 
+  noEndTimeCheck: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.noEndTime();
   }
 
+  /**
+   * Checks if there is no end time
+   */
+  noEndTime(): void{
+    if(this.task.taskEndTime.includes("00:00:00")){
+      this.noEndTimeCheck = true;
+    } else {
+      this.noEndTimeCheck = false;
+    }
+  }
 }

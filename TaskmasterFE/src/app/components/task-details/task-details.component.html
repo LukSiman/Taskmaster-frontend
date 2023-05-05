@@ -9,7 +9,7 @@
         <li class="list-group-item">
             Start time: {{ task.taskStartTime | date:'HH:mm'}}
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item" *ngIf="!noEndTimeCheck">
             End time: {{ task.taskEndTime | date:'HH:mm'}}
         </li>
     </div>
