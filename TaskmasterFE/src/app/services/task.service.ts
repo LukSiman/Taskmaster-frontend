@@ -6,11 +6,12 @@ import { environment } from 'src/environments/environment';
 export interface Task {
   taskUUID: string;
   taskName: string;
-  taskOrder: number;
   taskNote: string;
   taskStatus: number;
-  taskStartTime: Date;
-  taskEndTime: Date;
+  // taskStartTime: Date;
+  // taskEndTime: Date;
+  taskStartTime: string;
+  taskEndTime: string;
   taskDate: Date;
   categoryName: string;
 }

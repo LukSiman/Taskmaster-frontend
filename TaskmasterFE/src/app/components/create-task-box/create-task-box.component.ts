@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { star } from 'ngx-bootstrap-icons';
 import { Task } from 'src/app/entities/task';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -119,11 +120,14 @@ export class CreateTaskBoxComponent implements OnInit {
       taskName: this.taskName?.value,
       taskDate: this.taskDate?.value,
       taskNote: this.taskNote?.value,
-      taskStartTime: this.startTime?.value,
-      taskEndTime: this.endTime?.value,
+      // taskStartTime: this.startTime?.value,
+      // taskEndTime: this.endTime?.value,
+      // taskStartTime: `${this.taskDate?.value} ${this.startTime?.value}:00`,
+      // taskEndTime: `${this.taskDate?.value} ${this.endTime?.value}:00`,
+      taskStartTime: this.checkTimeFormat(this.startTime?.value, this.taskDate?.value),
+      taskEndTime: this.checkTimeFormat(this.endTime?.value, this.taskDate?.value),
       categoryName: this.category?.value,
       taskUUID: '',
-      taskOrder: 0,
       taskStatus: 0
     };
 
@@ -131,6 +135,10 @@ export class CreateTaskBoxComponent implements OnInit {
     // newTask.taskStartTime = this.checkTimeFormat(newTask.taskStartTime);
 
     //TODO: Fix backend LocalDateTime issues
+    //TODO: Update calendar count and taskBox after adding new task
+    //TODO: Default date should be of the selected day when adding
+    //TODO: End date should be empty if not entered
+
 
     //Sends task object and gets a response
     this.taskService.saveNewTask(newTask).subscribe({
@@ -147,10 +155,11 @@ export class CreateTaskBoxComponent implements OnInit {
   }
 
   // checks if time is in right format
-  private checkTimeFormat(time: string): string {
+  private checkTimeFormat(time: string, date: string): string {
     if (time === "") {
-      return "00:00:00";
+      return "";
+    } else {
+      return `${date} ${time}:00`;
     }
-    return time;
   }
 }
