@@ -22,8 +22,6 @@ export class CreateTaskBoxComponent implements OnInit {
   //Array with category options
   categoryOptions: string[] = ['Work', 'Entertainment', 'Sleep', 'Fitness', 'Education', 'Medical', 'Food', 'Shopping', 'Household', 'Beauty', 'Travel', 'Other'];
 
-  //TODO: Add actual saving on DB
-
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
@@ -31,7 +29,7 @@ export class CreateTaskBoxComponent implements OnInit {
     this.newTaskForm = new FormGroup({
       taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       // taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
-      taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
+      taskDate: new FormControl(this.getDayDate(), Validators.required),
       startTime: new FormControl(''),
       endTime: new FormControl(''),
       taskNote: new FormControl('', Validators.maxLength(200)),
@@ -82,13 +80,10 @@ export class CreateTaskBoxComponent implements OnInit {
   }
 
   /**
-  * Function to get the current local date in the required YYYY-MM-DD format:
+  * Function to get the date in the required YYYY-MM-DD format
   */
-  private getCurrentLocalDate(): string {
-    console.log(this.dayDate);
-    //TODO: Finish date input
-    const currentDate = new Date();
-    const localDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
+  private getDayDate(): string {
+    const localDate = new Date(this.dayDate);
     return localDate.toISOString().substring(0, 10);
   }
 
