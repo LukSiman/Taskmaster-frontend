@@ -127,5 +127,18 @@ export class TaskBoxComponent implements OnInit {
   openAddTaskBox() {
     const modalRef = this.modalService.open(CreateTaskBoxComponent);
     modalRef.componentInstance.dayDate = this.dayDate;
+
+    // Subscribes to the 'taskSaved' event emitted by the modal
+    modalRef.componentInstance.taskSaved.subscribe(() => {
+      //TODO: Finish
+      //TODO: Close the modal, display the task in the list/update the calendar
+      modalRef.close();
+
+      // Update the daysMap after deletion
+      // this.daysMap = this.dayMapUpdate()!;
+
+      // Update the dayTasks for the current dayDate after deletion
+      // this.dayTasks = this.daysMap.get(this.dayDate)!;
+    });
   }
 }
