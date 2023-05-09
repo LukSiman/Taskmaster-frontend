@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { star } from 'ngx-bootstrap-icons';
 import { Task } from 'src/app/entities/task';
@@ -19,6 +19,9 @@ export class CreateTaskBoxComponent implements OnInit {
   //Error message
   errorMessage: string = '';
 
+  // Output for saving a new task event
+  @Output() taskSaved = new EventEmitter<boolean>();
+
   //Array with category options
   categoryOptions: string[] = ['Work', 'Entertainment', 'Sleep', 'Fitness', 'Education', 'Medical', 'Food', 'Shopping', 'Household', 'Beauty', 'Travel', 'Other'];
 
@@ -28,7 +31,6 @@ export class CreateTaskBoxComponent implements OnInit {
     //initializing form group with control and validation
     this.newTaskForm = new FormGroup({
       taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      // taskDate: new FormControl(this.getCurrentLocalDate(), Validators.required),
       taskDate: new FormControl(this.getDayDate(), Validators.required),
       startTime: new FormControl(''),
       endTime: new FormControl(''),
@@ -135,7 +137,9 @@ export class CreateTaskBoxComponent implements OnInit {
 
 
 
-    //Sends task object and gets a response
+    /**
+    * Sends task object and gets a response
+    */
     this.taskService.saveNewTask(newTask).subscribe({
       next: (res) => {
         console.log(res);//TODO: delete
@@ -145,11 +149,16 @@ export class CreateTaskBoxComponent implements OnInit {
         console.log(err); //TODO: delete
         this.errorMessage = err;
       },
-      complete: () => console.log('Success')
+      complete: () => {
+        console.log('Success') //TODO: delete
+        this.taskSaved.emit(true);
+      }
     });
   }
 
-  // checks if time is in right format
+  /**
+  * Checks if time is in right format
+  */
   private checkTimeFormat(time: string, date: string): string {
     if (time === "") {
       return "";
