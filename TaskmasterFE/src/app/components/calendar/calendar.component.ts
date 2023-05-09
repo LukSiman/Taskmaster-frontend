@@ -62,7 +62,7 @@ export class CalendarComponent implements OnInit {
     // Wait for the task service to return the list of tasks, then store them in the 'tasks' array.
     await lastValueFrom(this.taskService.getTasks()).then(response => {
       this.tasks = response;
-      // console.log(this.tasks); //TODO: DELETE
+      //console.log(this.tasks); //TODO: DELETE
     });
 
     // Return a Promise that resolves immediately, indicating that the task data has been loaded and stored.

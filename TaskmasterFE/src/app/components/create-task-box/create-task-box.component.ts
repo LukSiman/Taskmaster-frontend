@@ -121,8 +121,6 @@ export class CreateTaskBoxComponent implements OnInit {
       taskName: this.taskName?.value,
       taskDate: this.taskDate?.value,
       taskNote: this.taskNote?.value,
-      // taskStartTime: this.startTime?.value,
-      // taskEndTime: this.endTime?.value,
       taskStartTime: this.checkTimeFormat(this.startTime?.value, this.taskDate?.value),
       taskEndTime: this.checkTimeFormat(this.endTime?.value, this.taskDate?.value),
       categoryName: this.category?.value,
@@ -134,17 +132,17 @@ export class CreateTaskBoxComponent implements OnInit {
     // newTask.taskStartTime = this.checkTimeFormat(newTask.taskStartTime);
 
     //TODO: Update calendar count and taskBox after adding new task
-    //TODO: Default date should be of the selected day when adding
+
 
 
     //Sends task object and gets a response
     this.taskService.saveNewTask(newTask).subscribe({
       next: (res) => {
-        console.log(res);
+        console.log(res);//TODO: delete
         this.errorMessage = '';
       },
       error: (err) => {
-        console.log(err);
+        console.log(err); //TODO: delete
         this.errorMessage = err;
       },
       complete: () => console.log('Success')

@@ -43,7 +43,7 @@ export class TaskBoxComponent implements OnInit {
   constructor(private modalService: NgbModal, private taskService: TaskService) { }
 
   ngOnInit(): void {
-    console.log(this.dayTasks); // TODO: Delete
+    // console.log(this.dayTasks); // TODO: Delete
   }
 
   /**

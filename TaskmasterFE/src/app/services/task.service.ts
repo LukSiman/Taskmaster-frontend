@@ -8,8 +8,6 @@ export interface Task {
   taskName: string;
   taskNote: string;
   taskStatus: number;
-  // taskStartTime: Date;
-  // taskEndTime: Date;
   taskStartTime: string;
   taskEndTime: string;
   taskDate: Date;
@@ -53,9 +51,8 @@ export class TaskService {
   */
   saveNewTask(task: Task): Observable<Object>  {
     const saveUrl = `${this.baseUrl}/save`;
-
-    console.log(task); //TODO: Delete
-
+    // console.log(task); //TODO: Delete
+    
     return this.httpClient.post(saveUrl, task).pipe(
       catchError(this.handleError)
     );

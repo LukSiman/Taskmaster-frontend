@@ -72,7 +72,7 @@ export class DayTasksComponent implements OnInit {
     await lastValueFrom(this.taskService.getTasksByDate(this.today)).then(
       response => {
         this.tasks = response;
-        // console.log(this.tasks); TODO: Remove
+        // console.log(this.tasks);// TODO: Remove
       });
 
     return new Promise<void>(resolve => {
