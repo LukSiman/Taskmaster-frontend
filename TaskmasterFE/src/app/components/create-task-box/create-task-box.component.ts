@@ -10,6 +10,9 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./create-task-box.component.scss']
 })
 export class CreateTaskBoxComponent implements OnInit {
+
+  //TODO: Repeating tasks
+
   // Input for the day's date
   @Input() dayDate: string = "";
 
@@ -129,13 +132,6 @@ export class CreateTaskBoxComponent implements OnInit {
       taskUUID: '',
       taskStatus: 0
     };
-
-    //changes time format if nothing was entered
-    // newTask.taskStartTime = this.checkTimeFormat(newTask.taskStartTime);
-
-    //TODO: Update calendar count and taskBox after adding new task
-
-
 
     /**
     * Sends task object and gets a response

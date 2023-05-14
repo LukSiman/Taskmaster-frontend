@@ -37,8 +37,8 @@ export class TaskBoxComponent implements OnInit {
   // Input for a call back function to update the daysMap
   @Input() dayMapUpdate!: () => void;
 
-  // Output for item deletion event
-  @Output() itemDeleted = new EventEmitter<boolean>();
+  // Output for changed item event
+  @Output() itemChanged = new EventEmitter<boolean>();
 
   constructor(private modalService: NgbModal, private taskService: TaskService) { }
 
@@ -110,14 +110,7 @@ export class TaskBoxComponent implements OnInit {
   deleteTask(uuid: string): void {
     // Delete the task using the taskService and update the daysMap and dayTasks after success
     this.taskService.deleteTask(uuid).subscribe(() => {
-      // Emit an event to notify the parent component about the item deletion
-      this.itemDeleted.emit(true);
-
-      // Update the daysMap after deletion
-      this.daysMap = this.dayMapUpdate()!;
-
-      // Update the dayTasks for the current dayDate after deletion
-      this.dayTasks = this.daysMap.get(this.dayDate)!;
+      this.updateTaskList();
     });
   }
 
@@ -128,17 +121,24 @@ export class TaskBoxComponent implements OnInit {
     const modalRef = this.modalService.open(CreateTaskBoxComponent);
     modalRef.componentInstance.dayDate = this.dayDate;
 
-    // Subscribes to the 'taskSaved' event emitted by the modal
+    // listen to the event for a new task being saved and update the task list
     modalRef.componentInstance.taskSaved.subscribe(() => {
-      //TODO: Finish
-      //TODO: Close the modal, display the task in the list/update the calendar
+      // close the modal
       modalRef.close();
 
-      // Update the daysMap after deletion
-      // this.daysMap = this.dayMapUpdate()!;
-
-      // Update the dayTasks for the current dayDate after deletion
-      // this.dayTasks = this.daysMap.get(this.dayDate)!;
+      // update the task list
+      this.updateTaskList();
     });
+  }
+
+  private updateTaskList() {
+    // Emit an event to notify the parent component about the change in tasks
+    this.itemChanged.emit(true);
+
+    // Update the daysMap after the change
+    this.daysMap = this.dayMapUpdate()!;
+
+    // Update the dayTasks for the current dayDate after the change
+    this.dayTasks = this.daysMap.get(this.dayDate)!;
   }
 }
