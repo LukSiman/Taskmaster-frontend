@@ -30,6 +30,17 @@
 
     <div class="row mb-3">
         <div class="col-3">
+            <label for="repetition" class="col-form-label">Repetition:</label>
+        </div>
+        <div class="col">
+            <select class="form-select" id="repetition" formControlName="repetition">
+                <option *ngFor="let repeatType of repetitionOptions" [value]="repeatType">{{ repeatType }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-3">
             <label for="startTime" class="col-form-label">Start time:</label>
         </div>
         <div class="col">

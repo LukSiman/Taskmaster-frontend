@@ -28,6 +28,9 @@ export class CreateTaskBoxComponent implements OnInit {
   //Array with category options
   categoryOptions: string[] = ['Work', 'Entertainment', 'Sleep', 'Fitness', 'Education', 'Medical', 'Food', 'Shopping', 'Household', 'Beauty', 'Travel', 'Other'];
 
+  //Array with repetition options
+  repetitionOptions: string[] = ['One time', 'Daily', 'Every Weekday', 'Weekly', 'Bi-Weekly', `Monthly (Every ${this.dayDate})`, 'Monthly (day)', 'Yearly', 'Custom'];
+
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
@@ -35,11 +38,14 @@ export class CreateTaskBoxComponent implements OnInit {
     this.newTaskForm = new FormGroup({
       taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       taskDate: new FormControl(this.getDayDate(), Validators.required),
+      repetition: new FormControl('One time'),
       startTime: new FormControl(''),
       endTime: new FormControl(''),
       taskNote: new FormControl('', Validators.maxLength(200)),
-      category: new FormControl('Other'),
+      category: new FormControl('Other')
     });
+
+
   }
 
   /**
@@ -55,6 +61,13 @@ export class CreateTaskBoxComponent implements OnInit {
   get taskDate() {
     return this.newTaskForm.get('taskDate');
   }
+
+    /**
+  * Returns repetition variable of the newTaskForm form
+  */
+    get repetition() {
+      return this.newTaskForm.get('repetition');
+    }
 
   /**
   * Returns startTime variable of the newTaskForm form
@@ -162,4 +175,6 @@ export class CreateTaskBoxComponent implements OnInit {
       return `${date} ${time}:00`;
     }
   }
+
+  // private updateMonthlySelection
 }
