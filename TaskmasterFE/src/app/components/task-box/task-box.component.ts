@@ -116,7 +116,7 @@ export class TaskBoxComponent implements OnInit {
   /**
   * Function that opens a new modal for adding new tasks
   */
-  openAddTaskBox() {
+  openAddTaskBox(): void {
     const modalRef = this.modalService.open(CreateTaskBoxComponent);
     modalRef.componentInstance.dayDate = this.dayDate;
 
@@ -130,7 +130,11 @@ export class TaskBoxComponent implements OnInit {
     });
   }
 
-  private updateTaskList() {
+
+  /**
+  * Helper method that updates the task list
+  */
+  private updateTaskList(): void {
     // Emit an event to notify the parent component about the change in tasks
     this.itemChanged.emit(true);
 

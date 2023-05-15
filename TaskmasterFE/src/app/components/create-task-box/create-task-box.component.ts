@@ -29,7 +29,7 @@ export class CreateTaskBoxComponent implements OnInit {
   categoryOptions: string[] = ['Work', 'Entertainment', 'Sleep', 'Fitness', 'Education', 'Medical', 'Food', 'Shopping', 'Household', 'Beauty', 'Travel', 'Other'];
 
   //Array with repetition options
-  repetitionOptions: string[] = ['One time', 'Daily', 'Every Weekday', 'Weekly', 'Bi-Weekly', `Monthly (Every ${this.dayDate})`, 'Monthly (day)', 'Yearly', 'Custom'];
+  repetitionOptions: string[] = ['One time', 'Daily', 'Every Weekday', 'Weekly', 'Bi-Weekly', 'Monthly (weekday)', 'Monthly (day)', 'Yearly', 'Custom'];
 
   constructor(private taskService: TaskService) { }
 
@@ -45,7 +45,7 @@ export class CreateTaskBoxComponent implements OnInit {
       category: new FormControl('Other')
     });
 
-
+    this.updateMonthlyRepetition();
   }
 
   /**
@@ -176,5 +176,22 @@ export class CreateTaskBoxComponent implements OnInit {
     }
   }
 
-  // private updateMonthlySelection
+  /**
+  * Updates the monthly repetition options to include weekday and month day
+  */
+  private updateMonthlyRepetition(): void{
+    const todayDate: Date = new Date(this.dayDate);
+    const weekday: string = this.getWeekday(todayDate);
+    
+    this.repetitionOptions[5] = `Monthly (every ${weekday})`;
+    this.repetitionOptions[6] = `Monthly (on day ${todayDate.getDate()})`;
+  }
+
+  /**
+  * Returns a weekday string from given date
+  */
+  private getWeekday(date: Date): string {
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return weekdays[date.getDay()];
+  } 
 }
