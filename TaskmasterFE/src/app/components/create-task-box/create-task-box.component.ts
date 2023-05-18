@@ -30,6 +30,9 @@ export class CreateTaskBoxComponent implements OnInit {
 
   //Array with repetition options
   repetitionOptions: string[] = ['One time', 'Daily', 'Every Weekday', 'Weekly', 'Bi-Weekly', 'Monthly (weekday)', 'Monthly (day)', 'Yearly', 'Custom'];
+  //TODO: Add custom repetition fields 
+  //TODO: Think of how to handle on backend
+  //TODO: Check mark to enable repetitions and add fields for when to stop
 
   constructor(private taskService: TaskService) { }
 
