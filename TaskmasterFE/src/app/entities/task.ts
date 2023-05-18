@@ -7,6 +7,7 @@ export class Task {
     taskEndTime: string;
     taskDate: Date;
     categoryName: string;
+    repetition: string;
 
     constructor() {
         this.taskUUID = ""
@@ -17,5 +18,6 @@ export class Task {
         this.taskEndTime = "";
         this.taskDate = new Date;
         this.categoryName = "";
+        this.repetition  = "";
     }
 }

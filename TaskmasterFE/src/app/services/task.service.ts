@@ -12,6 +12,7 @@ export interface Task {
   taskEndTime: string;
   taskDate: Date;
   categoryName: string;
+  repetition: string;
 }
 
 @Injectable({
@@ -57,6 +58,8 @@ export class TaskService {
       catchError(this.handleError)
     );
   }
+
+  //TODO: Add methods here and backend to handle repetitions
 
   /**
   * Handles error messages

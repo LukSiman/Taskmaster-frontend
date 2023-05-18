@@ -143,7 +143,8 @@ export class CreateTaskBoxComponent implements OnInit {
       taskEndTime: this.checkTimeFormat(this.endTime?.value, this.taskDate?.value),
       categoryName: this.category?.value,
       taskUUID: '',
-      taskStatus: 0
+      taskStatus: 0,
+      repetition: this.repetition?.value
     };
 
     /**

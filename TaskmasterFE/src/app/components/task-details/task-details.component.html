@@ -13,6 +13,9 @@
             End time: {{ task.taskEndTime | date:'HH:mm'}}
         </li>
     </div>
+    <li class="list-group-item" *ngIf="task.repetition != 'One time'">
+        Repetition: {{ task.repetition }}
+    </li>
     <li class="list-group-item p-3">
         <div class="d-grid">
             <button type="button" class="btn btn-primary">Modify task</button>
