@@ -35,18 +35,33 @@
 
     <div class="mb-3">
         <div class="form-check form-switch mb-3">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"  (click)="toggleRepetition()">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                (click)="toggleRepetition()">
             <label class="form-check-label" for="flexSwitchCheckDefault">Toggle repetition options</label>
         </div>
 
-        <div class="row" id="repetitionOptions">
-            <!-- <div class="col-3">
-                <label for="repetition" class="col-form-label">Repetition:</label>
-            </div> -->
-            <div class="col">
+        <div id="repetitionOptions">
+            <div class="col-12 mb-3">
                 <select class="form-select" id="repetition" formControlName="repetition">
-                    <option *ngFor="let repeatType of repetitionOptions" [value]="repeatType">{{ repeatType }}</option>
+                    <option *ngFor="let repeatType of repetitionOptions" [value]="repeatType">{{ repeatType }}
+                    </option>
                 </select>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <label for="repeatStopDate" class="col-form-label">Ends:</label>
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" id="repeatStopDate" formControlName="repeatStopDate">
+                </div>
+
+                <div>
+                    <div *ngIf="taskDate?.invalid && (taskDate?.dirty || taskDate?.touched)"
+                        class="alert alert-danger p-2 m-0">
+                        <small *ngIf="taskName?.errors?.['required']">Date is required.</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
