@@ -8,10 +8,13 @@
                 formControlName="taskName">
         </div>
 
-        <div *ngIf="taskName?.invalid && (taskName?.dirty || taskName?.touched)" class="alert alert-danger p-2 m-0">
-            <small *ngIf="taskName?.errors?.['required']">Name is required.</small>
-            <small *ngIf="taskName?.errors?.['minlength']">Name must be at least 2 characters long.</small>
-            <small *ngIf="taskName?.errors?.['maxlength']">Name must not be longer than 50 characters.</small>
+        <div>
+            <div *ngIf="taskName?.invalid && (taskName?.dirty || taskName?.touched)"
+                class="alert alert-danger p-2 mb-0">
+                <small *ngIf="taskName?.errors?.['required']">Name is required.</small>
+                <small *ngIf="taskName?.errors?.['minlength']">Name must be at least 2 characters long.</small>
+                <small *ngIf="taskName?.errors?.['maxlength']">Name must not be longer than 50 characters.</small>
+            </div>
         </div>
     </div>
 
@@ -23,19 +26,28 @@
             <input type="date" class="form-control" id="taskDate" formControlName="taskDate">
         </div>
 
-        <div *ngIf="taskDate?.invalid && (taskDate?.dirty || taskDate?.touched)" class="alert alert-danger p-2 m-0">
-            <small *ngIf="taskName?.errors?.['required']">Name is required.</small>
+        <div>
+            <div *ngIf="taskDate?.invalid && (taskDate?.dirty || taskDate?.touched)" class="alert alert-danger p-2 m-0">
+                <small *ngIf="taskName?.errors?.['required']">Date is required.</small>
+            </div>
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-3">
-            <label for="repetition" class="col-form-label">Repetition:</label>
+    <div class="mb-3">
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"  (click)="toggleRepetition()">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Toggle repetition options</label>
         </div>
-        <div class="col">
-            <select class="form-select" id="repetition" formControlName="repetition">
-                <option *ngFor="let repeatType of repetitionOptions" [value]="repeatType">{{ repeatType }}</option>
-            </select>
+
+        <div class="row" id="repetitionOptions">
+            <!-- <div class="col-3">
+                <label for="repetition" class="col-form-label">Repetition:</label>
+            </div> -->
+            <div class="col">
+                <select class="form-select" id="repetition" formControlName="repetition">
+                    <option *ngFor="let repeatType of repetitionOptions" [value]="repeatType">{{ repeatType }}</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -66,8 +78,10 @@
                 formControlName="taskNote"></textarea>
         </div>
 
-        <div *ngIf="taskNote?.invalid && (taskNote?.dirty || taskNote?.touched)" class="alert alert-danger p-2 m-0">
-            <small *ngIf="taskNote?.errors?.['maxlength']">Note must not be longer than 200 characters.</small>
+        <div>
+            <div *ngIf="taskNote?.invalid && (taskNote?.dirty || taskNote?.touched)" class="alert alert-danger p-2 m-0">
+                <small *ngIf="taskNote?.errors?.['maxlength']">Note must not be longer than 200 characters.</small>
+            </div>
         </div>
     </div>
 

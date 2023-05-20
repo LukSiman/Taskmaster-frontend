@@ -65,12 +65,12 @@ export class CreateTaskBoxComponent implements OnInit {
     return this.newTaskForm.get('taskDate');
   }
 
-    /**
-  * Returns repetition variable of the newTaskForm form
-  */
-    get repetition() {
-      return this.newTaskForm.get('repetition');
-    }
+  /**
+* Returns repetition variable of the newTaskForm form
+*/
+  get repetition() {
+    return this.newTaskForm.get('repetition');
+  }
 
   /**
   * Returns startTime variable of the newTaskForm form
@@ -183,10 +183,10 @@ export class CreateTaskBoxComponent implements OnInit {
   /**
   * Updates the monthly repetition options to include weekday and month day
   */
-  private updateMonthlyRepetition(): void{
+  private updateMonthlyRepetition(): void {
     const todayDate: Date = new Date(this.dayDate);
     const weekday: string = this.getWeekday(todayDate);
-    
+
     this.repetitionOptions[5] = `Monthly (every ${weekday})`;
     this.repetitionOptions[6] = `Monthly (on day ${todayDate.getDate()})`;
   }
@@ -197,5 +197,20 @@ export class CreateTaskBoxComponent implements OnInit {
   private getWeekday(date: Date): string {
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return weekdays[date.getDay()];
-  } 
+  }
+
+
+  /**
+   * Toggles the display value of the repetition options
+   */
+  toggleRepetition(): void {
+    const repetitionOptions = document.getElementById('repetitionOptions');
+
+    // display if not block display
+    if (repetitionOptions!.style.display != 'block') {
+      repetitionOptions!.style.display = 'block';
+    } else {
+      repetitionOptions!.style.display = 'none';
+    }
+  }
 }
