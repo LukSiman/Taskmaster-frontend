@@ -28,7 +28,7 @@
 
         <div>
             <div *ngIf="taskDate?.invalid && (taskDate?.dirty || taskDate?.touched)" class="alert alert-danger p-2 m-0">
-                <small *ngIf="taskName?.errors?.['required']">Date is required.</small>
+                <small *ngIf="taskDate?.errors?.['required']">Date is required.</small>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
                 </select>
             </div>
 
-            <div class="row">
+            <div class="row" id="stopDateRow">
                 <div class="col-3">
                     <label for="repeatStopDate" class="col-form-label">Ends:</label>
                 </div>
@@ -57,9 +57,9 @@
                 </div>
 
                 <div>
-                    <div *ngIf="taskDate?.invalid && (taskDate?.dirty || taskDate?.touched)"
+                    <div *ngIf="repeatStopDate?.invalid && (repeatStopDate?.dirty || repeatStopDate?.touched)"
                         class="alert alert-danger p-2 m-0">
-                        <small *ngIf="taskName?.errors?.['required']">Date is required.</small>
+                        <small *ngIf="repeatStopDate?.errors?.['required']">End date is required.</small>
                     </div>
                 </div>
             </div>

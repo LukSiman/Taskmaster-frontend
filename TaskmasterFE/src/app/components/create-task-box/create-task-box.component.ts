@@ -30,6 +30,7 @@ export class CreateTaskBoxComponent implements OnInit {
 
   //Array with repetition options
   repetitionOptions: string[] = ['One time', 'Daily', 'Every Weekday', 'Weekly', 'Bi-Weekly', 'Monthly (weekday)', 'Monthly (day)', 'Yearly', 'Custom'];
+
   //TODO: Add custom repetition fields 
   //TODO: Think of how to handle on backend
   //TODO: Check mark to enable repetitions and add fields for when to stop
@@ -42,6 +43,7 @@ export class CreateTaskBoxComponent implements OnInit {
       taskName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       taskDate: new FormControl(this.getDayDate(), Validators.required),
       repetition: new FormControl('One time'),
+      repeatStopDate: new FormControl({ value: this.getDayDate(), disabled: true }, Validators.required),
       startTime: new FormControl(''),
       endTime: new FormControl(''),
       taskNote: new FormControl('', Validators.maxLength(200)),
@@ -66,10 +68,17 @@ export class CreateTaskBoxComponent implements OnInit {
   }
 
   /**
-* Returns repetition variable of the newTaskForm form
-*/
+  * Returns repetition variable of the newTaskForm form
+  */
   get repetition() {
     return this.newTaskForm.get('repetition');
+  }
+
+  /**
+  * Returns repeatStopDate variable of the newTaskForm form
+  */
+  get repeatStopDate() {
+    return this.newTaskForm.get('repeatStopDate');
   }
 
   /**
@@ -209,8 +218,20 @@ export class CreateTaskBoxComponent implements OnInit {
     // display if not block display
     if (repetitionOptions!.style.display != 'block') {
       repetitionOptions!.style.display = 'block';
+
+      // listen to the value of the repetition selection
+      const repetitionElement = document.getElementById('repetition');
+      repetitionElement?.addEventListener('change', () => {
+        // if value is one time then disable the date input
+        if (this.repetition?.value != 'One time') {
+          this.repeatStopDate?.enable();
+        } else {
+          this.repeatStopDate?.disable();
+        }
+      });
     } else {
       repetitionOptions!.style.display = 'none';
     }
   }
+
 }
